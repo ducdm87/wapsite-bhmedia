@@ -1,5 +1,6 @@
 <?php 
 function showBlockHome($items, $title = "Video Hot", $url = ""){
+    if(count($items)<1) return false;
     $item = $items[0];
     unset($items[0]);
     
@@ -25,11 +26,11 @@ function showBlockHome($items, $title = "Video Hot", $url = ""){
                 <div class="entry-body">                    
                         <div class="container-fluid">
                             <div class="col-md-4 no-padding-md">                                 
-                                    <div href="<?php echo Yii::app()->createUrl('videos/detail?id=' . $item['id'] . '&alias=' . $item['alias']) ?>" class="thumbnail">
+                                    <div href="<?php echo $item['link']; ?>" class="thumbnail">
                                         <img src="<?php echo $item['thumbnail'] ?>" alt="<?php echo $item['title'] ?>">
-                                        <a href="<?php echo Yii::app()->createUrl('videos/detail?id=' . $item['id'] . '&alias=' . $item['alias']) ?>" class="icon-play"></a>
+                                        <a href="<?php echo $item['link']; ?>" class="icon-play"></a>
                                         <div class="caption">
-                                            <a href="<?php echo Yii::app()->createUrl('videos/detail?id=' . $item['id'] . '&alias=' . $item['alias']) ?>"><?php echo isset($item['title']) ? $item['title'] : '' ?></a>
+                                            <a href="<?php echo $item['link']; ?>"><?php echo isset($item['title']) ? $item['title'] : '' ?></a>
                                         </div>
                                     </div>                                
                             </div>
@@ -42,7 +43,7 @@ function showBlockHome($items, $title = "Video Hot", $url = ""){
                                             <div class="col-md-6 row-box">
                                                 <div class="media item">
                                                     <div class="media-left entry-thunb">
-                                                        <a href="<?php echo Yii::app()->createUrl('videos/detail?id=' . $item['id'] . '&alias=' . $item['alias']) ?>">
+                                                        <a href="<?php echo $item['link']; ?>">
                                                             <img class="media-object" src="<?php echo $item['thumbnail'] ?>" alt="Video <?php echo $item['title'] ?>">
                                                             <?php if(isset($item['duration'])){ ?>
                                                                 <span class="entry_time"><?php echo $item['duration'] ?></span>
@@ -50,13 +51,13 @@ function showBlockHome($items, $title = "Video Hot", $url = ""){
                                                         </a>
                                                     </div>
                                                     <div class="media-body">
-                                                        <span class="media-heading"><a href="<?php echo Yii::app()->createUrl('videos/detail?id=' . $item['id'] . '&alias=' . $item['alias']) ?>"><?php echo buildHtml::truncateText($item['title'], 40) ?></a></span>
+                                                        <span class="media-heading"><a href="<?php echo $item['link']; ?>"><?php echo buildHtml::truncateText($item['title'], 40) ?></a></span>
                                                         <span class="entry-control">
                                                             <span><i class="fa fa-thumbs-o-up"></i> <?php echo isset($item['value']) ? $item['value'] : 0; ?></span>
                                                             <span><i class="fa fa-play-circle-o"></i> <?php echo isset($item['viewed']) ? $item['viewed'] : 0; ?></span>
                                                         </span>
                                                         <div class="entry-social hidden-lg hidden-md">
-                                                            <div class="fb-like" data-href="<?php echo Yii::app()->createUrl('videos/detail?id=' . $item['id'] . '&alias=' . $item['alias']) ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+                                                            <div class="fb-like" data-href="<?php echo $item['link']; ?>" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -76,11 +77,10 @@ function showBlockHome($items, $title = "Video Hot", $url = ""){
  
 
 <div class="page-home">
-    <?php showBlockHome($videos, "Video Hot", Yii::app()->createUrl('/videos') ); ?>
-     
-    <?php showBlockHome($video_sposrts, "Thể thao", Yii::app()->createUrl('/videos?t=the-thao') ); ?>
-    
-    <?php showBlockHome($posts, "Tin Tức", Yii::app()->createUrl('/news') ); ?>
+    <?php foreach($list_category as $category){     
+        ?>
+        <?php showBlockHome($category['items'], $category['title'], $category['link'] ); ?>
+    <?php } ?>
 </div>
        
      

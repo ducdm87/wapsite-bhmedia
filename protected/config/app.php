@@ -26,6 +26,7 @@ $settings = array(
                 'tin-tuc/<id:[0-9]+>-<alias:.*>' => array('news/detail','urlSuffix'=>'.html'),
                           
                 '<alias:[\d\w-]+>' => array('videos/category'), 
+                'video/<id:[\d\w-]+>' => array('videos/detail'), 
             ),
         ),
         

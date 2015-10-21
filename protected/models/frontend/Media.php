@@ -152,17 +152,25 @@ class Media extends CFormModel {
         
         $command->limit($limit, $start);
         $command->order("$filter_order $filter_order_Dir");
-        $command->where("c.id = $catID");
-        if($feature == 1)
-            $command->where("a.feature = 1");
+        $where = array();
+        $where[] = "c.id = $catID";
+        $where[] = "a.feature = 1";
+        $command->where(implode(" AND ", $where));
         
-        $results = $command->select('a.*,c.title as name,c.alias as calias, c.id as cid,ep.*,lk.*')
+        $items = $command->select('a.*,c.title as name,c.alias as calias, c.id as cid,ep.*,lk.*')
                 ->from("$this->table  a")
                 ->join("$this->table_categories  c", 'a.category_id=c.id')
                 ->join("$this->table_episode  ep", 'a.id=ep.film_id')
                 ->leftjoin("$this->table_like lk", "a.id=lk.fid")
                 ->queryAll();
-        return $results;
+   
+        
+        if(count($items))
+            foreach($items as & $item){
+                $item['slug'] = $item['id']."-".$item['alias'];
+                $item['link'] = Yii::app()->createUrl("videos/detail", array("id"=> $item['slug']));
+            }
+        return $items;
     }
     
     function getCategoryByAlias($catAlias){

@@ -32,9 +32,10 @@ class YiiCategory{
         return $instance;
     } 
     
-    function loadItems($field = "*", $condition = "", $oderby = " lft ASC "){
+    function loadItems($field = "*", $condition = "", $oderby = " lft ASC ", $limit = 10, $start = 0){
+        
         $table = YiiTables::getInstance(TBL_CATEGORIES);
-        $items = $table->loads($field, $condition,$oderby, null, null);
+        $items = $table->loads($field, $condition,$oderby, $limit, $start);
         return $items;
     }
     

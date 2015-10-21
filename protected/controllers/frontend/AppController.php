@@ -21,11 +21,20 @@ class AppController extends FrontEndController {
     }
 
     public function actionDisplay() {
-
+        $model_category = Category::getInstance();
+        $list_category = $model_category->getItems();
+        if(count($list_category)){
+            $media = Media::getInstance();
+            foreach ($list_category as & $category){
+                $category['items'] = $media->getItems($category['id'], $feature = 1, 5);                
+            }
+        }
+        
+        //$model_news = News::getInstance();
+        
         $data = array();
-        $data['videos'] = $this->media->getMedias(5, 0, array('m.type' => 1));
-        $data['video_sposrts'] = $this->media->getMedias(5, 0, array('m.type' => 2));
-        $data['posts'] = $this->post->getPosts(5, 0, array('p.status' => 1));        
+        $data['list_category'] = $list_category;              
+       // $data['news'] = $list_category;              
         $this->render('default', $data);
     }
 

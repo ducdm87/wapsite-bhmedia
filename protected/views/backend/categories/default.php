@@ -7,6 +7,7 @@
                 <th width="3%" class="title"> <input type="checkbox" onclick="checkAll(<?php echo count($items); ?>);" value="" name="toggle"> </th>
                 <th class="title" width="3%"> <a>Status</a></th>
                 <th class="title"> <a>Name</a></th>
+                <th class="title" width="10%"> <a>Feature</a></th>                                
                 <th class="title" width="10%"> <a>Scope</a></th>                                
                 <th class="title"  width="3%"> <a>ID</a></th>
             </tr>
@@ -22,6 +23,7 @@
                     <td><input type="checkbox" onclick="isChecked(this.checked);" value="<?php echo $item['id'] ?>" name="cid[]" id="cb<?php echo ($i); ?>"></td>
                     <td><?php echo buildHtml::status($i, $item['status']); ?></td>
                     <td><a href="<?php echo $link_edit; ?>"><?php echo $item['title']; ?></a></td>                     
+                    <td><?php echo buildHtml::changState($i, $item['feature'],"feature."); ?></td>
                     <td><?php echo $item['scope'] ?></td>                    
                     <td><?php echo $item['id'] ?></td>
                 </tr>

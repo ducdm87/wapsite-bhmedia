@@ -24,7 +24,7 @@ class CategoriesController extends BackEndController {
     public function actionDisplay() {
         
         $task = Request::getVar('task', "");
-        if ($task == "hidden" OR $task == 'publish' OR $task == "unpublish") {
+        if ($task != "") {
             $cids = Request::getVar('cid');            
             for ($i = 0; $i < count($cids); $i++) {
                 $cid = $cids[$i];
@@ -32,9 +32,11 @@ class CategoriesController extends BackEndController {
                     $this->changeStatus ($cid, 1);
                 else if ($task == "hidden")
                     $this->changeStatus ($cid, 2);
-                else $this->changeStatus ($cid, 0);
+                elseif($task == "unpublish") $this->changeStatus ($cid, 0);
+                else if($task == "feature.on") $this->changeFeature ($cid, 1);
+                else if($task == "feature.off") $this->changeFeature ($cid, 0);
             }
-            YiiMessage::raseSuccess("Successfully saved changes status for menu type");
+            YiiMessage::raseSuccess("Successfully saved changes category(s)");
         }
         
         
@@ -57,7 +59,7 @@ class CategoriesController extends BackEndController {
         
         $this->addIconToolbar("Save", $this->createUrl("/categories/save"), "save");
         $this->addIconToolbar("Apply", $this->createUrl("/categories/apply"), "apply");
-        $this->addBarTitle("Module <small>[Edit]</small>", "user");
+        $this->addBarTitle("Category <small>[Edit]</small>", "user");
         $this->addIconToolbar("Close", $this->createUrl("/categories/cancel"), "cancel");
         $this->pageTitle = "Edit category";           
         
@@ -87,37 +89,15 @@ class CategoriesController extends BackEndController {
         global $mainframe;
         
         $cid = Request::getVar("id", 0); 
-       
-        $obj_category = YiiModule::getInstance();
-        $obj_row = $obj_category->loadItem($cid);
-        $obj_row->bind($_POST);
         
-        $menu_selected = Request::getVar('selection-menu-select', 'selected');
-        $obj_row->params = json_encode($_POST['params']);
-        $obj_row->menu = $menu_selected;
-        $obj_row->store();
+        $obj_category = YiiCategory::getInstance();        
+        $obj_category = $obj_category->loadItem($cid, "*", false); 
          
-        if($menu_selected == 'all'){
-            $query = "DELETE FROM ".TBL_MODULE_MENUITEM_REF." WHERE categoryID = $obj_row->id ";
-            Yii::app()->db->createCommand($query)->query();
-            
-            $query = "INSERT INTO ".TBL_MODULE_MENUITEM_REF." SET categoryID = $obj_row->id, menuID = 0 ";
-            Yii::app()->db->createCommand($query)->query();
-            
-        }else if($menu_selected == 'selected' AND isset ($_POST['selection-menu'])){
-            $menuids = $_POST['selection-menu'];
-            foreach($menuids as $menuid){
-                $query = "REPLACE INTO ".TBL_MODULE_MENUITEM_REF." SET categoryID = $obj_row->id, menuID = $menuid ";
-                Yii::app()->db->createCommand($query)->query();
-            } 
-        }else{
-            $query = "DELETE FROM ".TBL_MODULE_MENUITEM_REF." WHERE categoryID = $obj_row->id ";
-            Yii::app()->db->createCommand($query)->query();
-        }
-            
+        $obj_category->bind($_POST);           
+        $obj_category->store(); 
  
-        YiiMessage::raseSuccess("Successfully save Module(s)");
-        return $obj_row->id;
+        YiiMessage::raseSuccess("Successfully save Category");
+        return $obj_category->id;
     }
     
     
@@ -150,6 +130,13 @@ class CategoriesController extends BackEndController {
         $obj = YiiCategory::getInstance();        
         $obj = $obj->loadItem($cid, "*", false); 
         $obj->status = $value;
+        $obj->store();
+    }
+    function changeFeature($cid, $value)
+    {
+        $obj = YiiCategory::getInstance();        
+        $obj = $obj->loadItem($cid, "*", false); 
+        $obj->feature = $value;
         $obj->store();
     }
 }

@@ -28,31 +28,25 @@ class Category extends CFormModel {
         return $instance;
     }
 
-    public function getCategories($limit = 5, $offset = 0, $where = array(), $query = false, $or_where = false, $order = false, $by = false) {
-
-        if ($limit > 0) {
-            $this->command->limit($limit, $offset);
+    public function getItems($feature = true, $condition = "", $limit = 5, $start = 0) {        
+        $conds = array();
+        if($condition != "")
+            $conds[] = $condition;
+        if($feature == true){
+            if($condition == "")
+            $conds[] = " feature = 1";
         }
-
-        if ($where && is_array($where)) {
-            foreach ($where as $key => $value) {
-                if (!is_array($value)) {
-                    $this->command->where("$key =:$key", array("$key" => $value));
-                }
-//                else {
-//                    foreach ($value as $k => $v) {
-//                        $this->command->where("$k :=$k", array("$k" => $v));
-//                    }
-//                }
+        $condition = implode(" AND ", $conds);
+         
+        $obj_category = YiiCategory::getInstance();
+        $items = $obj_category->loadItems("*", $condition, $oderby = " lft DESC ", $limit, $start);
+        if(count($items)){
+            foreach($items as &$item){
+                $item['link'] = Yii::app()->createUrl("videos/category", array("alias"=>$item['alias']));                
             }
         }
-
-        $results = $this->command->select('*')
-                ->from($this->table)
-                ->queryAll();
-
-        return $results;
-        //$this->command->reset();
+        return $items;
+         
     }
 
     public function getCategoryById($id) {
