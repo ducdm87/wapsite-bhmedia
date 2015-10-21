@@ -10,6 +10,7 @@ define("TBL_MODULE_MENUITEM_REF", "{{module_menuitem_ref}}");
 define("TBL_SESSION", "{{session}}");
 define("TBL_USERS", "{{users}}");
 define("TBL_USERS_GROUP", "{{users_group}}");
+define("TBL_VIDEOS", "{{videos}}");
 
 
 return array(

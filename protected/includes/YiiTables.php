@@ -17,6 +17,7 @@ class YiiTables{
     
     
     function __construct($tbl_name, $primary = "id", $db) {
+         
         $this->_tablename = $tbl_name;
         $this->_primary = $primary;
         

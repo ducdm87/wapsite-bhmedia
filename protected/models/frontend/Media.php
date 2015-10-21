@@ -8,7 +8,7 @@
 
 class Media extends CFormModel {
 
-    private $table = "{{films}}";
+    private $table = "{{videos}}";
     private $table_episode = "{{episode}}";
     private $table_categories = "{{categories}}";
     private $table_like = "{{like}}";
