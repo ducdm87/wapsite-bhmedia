@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2015 at 10:54 AM
+-- Generation Time: Oct 22, 2015 at 12:06 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -53,12 +53,12 @@ CREATE TABLE IF NOT EXISTS `tbl_categories` (
 --
 
 INSERT INTO `tbl_categories` (`id`, `title`, `alias`, `scope`, `cdate`, `mdate`, `ordering`, `lft`, `rgt`, `type`, `description`, `metakey`, `metadesc`, `showpath`, `status`, `feature`, `link_original`, `redirect`) VALUES
-(31, 'Tin tức-Làm đẹp', 'tin-tuc-lam-dep', '', '2015-08-26 08:14:25', '2015-10-21 10:35:04', 0, 0, 0, 0, 'Tin tức-Làm đẹp', 'Tin tức-Làm đẹp', 'Tin tức-Làm đẹp', 0, 1, 0, '', 0),
-(30, 'Tin tức-Sao việt', 'tin-tuc-sao-viet', '', '2015-08-26 08:14:12', '2015-08-26 08:14:12', 0, 0, 0, 0, 'Tin tức-Sao việt', 'Tin tức-Sao việt', 'Tin tức-Sao việt', 0, 1, 0, '', 0),
+(31, 'Tin tức-Làm đẹp', 'tin-tuc-lam-dep', '', '2015-08-26 08:14:25', '2015-10-21 21:15:15', 0, 0, 0, 0, 'Tin tức-Làm đẹp', 'Tin tức-Làm đẹp', 'Tin tức-Làm đẹp', 0, 1, 1, '', 0),
+(30, 'Tin tức-Sao việt', 'tin-tuc-sao-viet', '', '2015-08-26 08:14:12', '2015-10-21 21:15:30', 0, 0, 0, 0, 'Tin tức-Sao việt', 'Tin tức-Sao việt', 'Tin tức-Sao việt', 0, 1, 1, '', 0),
 (29, 'Vui nhộn', 'vui-nhon', '', '2015-08-25 03:54:49', '2015-08-25 03:54:49', 0, 0, 0, 1, 'Vui nhộn', 'Vui nhộn', 'Vui nhộn', 0, 1, 0, '', 0),
 (28, 'Phim Con Heo', 'phim-con-heo', '', '2015-08-25 03:54:21', '2015-08-25 03:54:21', 0, 0, 0, 1, 'Phim con heo', 'Phim con heo', 'Phim con heo', 0, 1, 0, '', 0),
 (27, 'Hài Hước', 'hai-huoc', '', '2015-08-25 03:51:41', '2015-08-25 03:51:41', 0, 0, 0, 1, 'ádasd', 'ádas', 'ádasdas', 0, 1, 0, '', 0),
-(32, 'Thể Thao', 'the-thao', '', '2015-08-27 11:16:04', '2015-10-21 10:52:41', 0, 0, 0, 1, 'thể thao', '', '', 0, 1, 0, '', 0);
+(32, 'Thể Thao', 'the-thao', '', '2015-08-27 11:16:04', '2015-10-21 21:15:40', 0, 0, 0, 1, 'thể thao', '', '', 0, 1, 1, '', 0);
 
 -- --------------------------------------------------------
 
@@ -142,69 +142,6 @@ CREATE TABLE IF NOT EXISTS `tbl_extensions` (
 
 INSERT INTO `tbl_extensions` (`id`, `title`, `alias`, `author`, `version`, `description`, `creationDate`, `ordering`, `type`, `folder`, `client`, `showtitle`, `status`, `params`, `cdate`, `mdate`, `position`) VALUES
 (67, '', '', '', '', '', 'January 1', 3, 'module', '', '1', 0, 1, '{"jahdskjashdka":"gshdagshdka","bhjabsdh aksd":"\\u00e1hdahdasdas","date":""}', '2015-08-19 05:53:17', '2015-08-19 05:53:17', '1');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_films`
---
-
-CREATE TABLE IF NOT EXISTS `tbl_films` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `alias` varchar(255) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `actor` varchar(255) DEFAULT NULL,
-  `info` text,
-  `duration` varchar(255) DEFAULT NULL,
-  `viewed` int(11) DEFAULT NULL,
-  `category_id` bigint(20) NOT NULL,
-  `director` varchar(255) DEFAULT NULL,
-  `film_year` varchar(255) DEFAULT NULL,
-  `film_area` varchar(255) DEFAULT NULL,
-  `rating` int(11) DEFAULT NULL,
-  `cdate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `mdate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `status` int(11) NOT NULL,
-  `feature` tinyint(4) NOT NULL,
-  `type` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `category_id` (`category_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
-
---
--- Dumping data for table `tbl_films`
---
-
-INSERT INTO `tbl_films` (`id`, `title`, `alias`, `image`, `actor`, `info`, `duration`, `viewed`, `category_id`, `director`, `film_year`, `film_area`, `rating`, `cdate`, `mdate`, `status`, `feature`, `type`) VALUES
-(36, 'Answer for "Get month name from Date using JavaScript"', 'answer-for-get-month-name-from-date-using-javascript', '/uploads/images/26/08/2015/1440302798-1439290851-trang-diem-dv1%5B1%5D.jpg', 'Asian', 'sf 34r34r3r34r34', '3', 3, 28, NULL, '323324', '4353453', NULL, '2015-08-26 11:58:29', '2015-08-26 11:58:29', 1, 0, '1'),
-(37, 'Ke O Mien Xa - Dan Nguyen', 'ke-o-mien-xa-dan-nguyen', '/uploads/images/26/08/2015/1440468146-1440467967-1%5B1%5D.jpg', 'Asian', 'lá jhasj dbahbd hakgdskhadgsasgi đáiátdá', '3', 1, 28, NULL, '323324', '4353453', NULL, '2015-08-27 03:43:59', '2015-08-27 03:43:59', 1, 0, '1'),
-(38, 'Rừng Lá Thấp', 'rung-la-thap', NULL, 'Japan', 'bhagdkahgsdasjdasdasd', '3:55', NULL, 29, NULL, '323324', '4353453', NULL, '2015-08-27 04:51:06', '2015-08-27 04:51:06', 1, 0, '1'),
-(39, 'Hai con nai', 'hai-con-nai', '/uploads/images/27/08/2015/vn.png', 'áldasdas', 'uaosy gauygskygakyudgayusd7o6atd7 62thasd gaygsdkjashd', '3', 8, 29, NULL, '323324', '4353453', NULL, '2015-08-27 06:08:22', '2015-08-27 06:08:22', 1, 0, '1'),
-(40, 'Troubleshooting', 'troubleshooting', '/uploads/images/27/08/2015/Big_Buck_Bunny_Trailer_480x270.png', 'Asian', 'A great all rounder. The net tab can disable cache and allow you to review server response and MIME types easily', '3', NULL, 27, NULL, '323324', '4353453', NULL, '2015-08-27 08:52:50', '2015-08-27 08:52:50', 1, 0, '1'),
-(41, 'Video Hài Hước - Top 10 Pha Bóng Đá Hài Hước Khó Đỡ Nhất', 'video-hai-huoc-top-10-pha-bong-da-hai-huoc-kho-do-nhat', '/uploads/images/28/08/2015/dong0467-1440726511_490x294.jpg', '', 'khonf co mo ta nao', '', 1, 32, NULL, '', '', NULL, '2015-08-28 05:39:42', '2015-08-28 05:39:42', 1, 1, '2'),
-(42, '10 pha bóng hài hước nhất thế giới bóng đá', '10-pha-bong-hai-huoc-nhat-the-gioi-bong-da', '', '', '10 pha bóng hài hước nhất thế giới bóng đá', '', 3, 29, NULL, '', '', NULL, '2015-08-28 04:32:41', '2015-08-28 04:32:41', 1, 0, '1'),
-(43, 'KĨ THUẬT CỦA HAI SIÊU SAO BÓNG ĐÁ HÀNG ĐẦU THẾ GIỚI', 'ki-thuat-cua-hai-sieu-sao-bong-da-hang-dau-the-gioi', '/uploads/images/28/08/2015/CNbhcx6WIAA3Hrd-5422-1440716111.png', '', 'KĨ THUẬT CỦA HAI SIÊU SAO BÓNG ĐÁ HÀNG ĐẦU THẾ GIỚI', '', 1, 32, NULL, '', '', NULL, '2015-08-28 05:46:10', '2015-08-28 05:46:10', 1, 1, '2'),
-(44, 'Messi và những pha đi bóng thần thánh', 'messi-va-nhung-pha-di-bong-than-thanh', '', '', 'Messi và những pha đi bóng thần thánh', '', NULL, 32, NULL, '', '', NULL, '2015-08-28 04:47:49', '2015-08-28 04:47:49', 1, 0, '2'),
-(45, 'Ronaldinho & Messi ● THE MOVIE ● Two Legends - One Story || HD', 'ronaldinho-messi-the-movie-two-legends-one-story-hd', '/uploads/images/28/08/2015/tag-reuters-1-5897-1440697725-7716-8563-1440716111.jpg', '', 'Ronaldinho & Messi ● THE MOVIE ● Two Legends - One Story || HD', '', 4, 32, NULL, '', '', NULL, '2015-08-28 05:48:09', '2015-08-28 05:48:09', 1, 1, '2'),
-(46, 'Hài miền Bắc: Căn bệnh kỳ lạ, Quang Thắng, Công Lý', 'hai-mien-bac-can-benh-ky-la-quang-thang-cong-ly', '', 'VN', 'asvdhg kaygadskyu gidasid đâs', '14:55', NULL, 29, NULL, '', '', NULL, '2015-08-31 03:38:28', '2015-08-31 03:38:28', 1, 0, '3'),
-(47, 'Hài miền Bắc: Rắn nổi, Chiến Thắng, Công Lý', 'hai-mien-bac-ran-noi-chien-thang-cong-ly', '', '', 'Hài miền Bắc: Rắn nổi, Chiến Thắng, Công Lý', '14:41', NULL, 29, NULL, '', '', NULL, '2015-08-31 03:40:55', '2015-08-31 03:40:55', 1, 0, '3'),
-(48, 'Hài miền Bắc: Đổi đời, Công Lý, Anh Tuấn, Thanh Tú', 'hai-mien-bac-doi-doi-cong-ly-anh-tuan-thanh-tu', '', '', 'Hài miền Bắc: Đổi đời, Công Lý, Anh Tuấn, Thanh Tú', '14:55', NULL, 29, NULL, '', '', NULL, '2015-08-31 03:44:43', '2015-08-31 03:44:43', 1, 0, '3'),
-(49, 'Hài miền Bắc: Đàn bà thời nay', 'hai-mien-bac-dan-ba-thoi-nay', '', 'Japan', 'Hài miền Bắc: Đàn bà thời nay', '9:28', NULL, 29, NULL, '', '', NULL, '2015-08-31 03:49:09', '2015-08-31 03:49:09', 1, 0, '3'),
-(50, 'Hài miền Bắc: MC làng, Anh Quân, Quốc Trị', 'hai-mien-bac-mc-lang-anh-quan-quoc-tri', '', '', 'Hài miền Bắc: MC làng, Anh Quân, Quốc Trị', '', 1, 27, NULL, '', '', NULL, '2015-08-31 03:50:42', '2015-08-31 03:50:42', 1, 0, '3'),
-(51, 'Hài miền Bắc: Đổi đời, Công Lý, Anh Tuấn, Thanh Tú', 'hai-mien-bac-doi-doi-cong-ly-anh-tuan-thanh-tu', '', '', 'Hài miền Bắc: Đổi đời, Công Lý, Anh Tuấn, Thanh Tú', '14:55', NULL, 29, NULL, '', '', NULL, '2015-08-31 03:51:26', '2015-08-31 03:51:26', 1, 0, '1'),
-(52, '[Phim Hài] Bình Luận Bóng Đá | Chiến Thắng , Quang Tèo Mai Thỏ', 'phim-hai-binh-luan-bong-da-chien-thang-quang-teo-mai-tho', '', '', '[Phim Hài] Bình Luận Bóng Đá | Chiến Thắng , Quang Tèo Mai Thỏ', '9:56', NULL, 29, NULL, '', '', NULL, '2015-08-31 03:52:22', '2015-08-31 03:52:22', 1, 0, '3'),
-(53, 'Phim Hài Ngắn Hay Nhất | Tuyển Dụng Gái Mát Xa', 'phim-hai-ngan-hay-nhat-tuyen-dung-gai-mat-xa', '', '', 'Phim Hài Ngắn Hay Nhất | Tuyển Dụng Gái Mát Xa', '23:55', 2, 29, NULL, '', '', NULL, '2015-08-31 03:55:58', '2015-08-31 03:55:58', 1, 0, '3'),
-(54, '[Phim Hài] Các Em Ấy Khỏe Lắm - Mai Thỏ, Quang Tèo, Trung Hiếu', 'phim-hai-cac-em-ay-khoe-lam-mai-tho-quang-teo-trung-hieu', '', '', '[Phim Hài] Các Em Ấy Khỏe Lắm - Mai Thỏ, Quang Tèo, Trung Hiếu', '', NULL, 29, NULL, '', '', NULL, '2015-08-31 03:57:39', '2015-08-31 03:57:39', 1, 0, '3'),
-(55, 'Môn thể thao bựa nhất trong lịch sử =))', 'mon-the-thao-bua-nhat-trong-lich-su', '', '', 'Môn thể thao bựa nhất trong lịch sử =))', '', NULL, 32, NULL, '', '', NULL, '2015-08-31 04:01:45', '2015-08-31 04:01:45', 1, 1, '2'),
-(56, '[Thể Thao 24h] - Thụy Điển 2 - 3 Bồ Đào Nha Tổng 2 - 4, Lượt về play off vòng loại World Cup 2014', 'the-thao-24h-thuy-dien-2-3-bo-dao-nha-tong-2-4-luot-ve-play-off-vong-loai-world-cup-2014', '', '', '[Thể Thao 24h] - Thụy Điển 2 - 3 Bồ Đào Nha Tổng 2 - 4, Lượt về play off vòng loại World Cup 2014', '2:27', 1, 32, NULL, '', '', NULL, '2015-08-31 04:03:22', '2015-08-31 04:03:22', 1, 1, '1'),
-(57, 'Tin điện ảnh| Trương Quỳnh Anh được Tim tặng xế hộp sau khi làm lành', 'tin-dien-anh-truong-quynh-anh-duoc-tim-tang-xe-hop-sau-khi-lam-lanh', '', '', 'Tin điện ảnh| Trương Quỳnh Anh được Tim tặng xế hộp sau khi làm lành', '1:22', NULL, 29, NULL, '', '', NULL, '2015-08-31 04:08:12', '2015-08-31 04:08:12', 1, 0, '4'),
-(58, 'Tin hot nhất trong ngày - Trương Quỳnh Anh khoe chân dài sexy, thân mật bên Phạm Văn Mách', 'tin-hot-nhat-trong-ngay-truong-quynh-anh-khoe-chan-dai-sexy-than-mat-ben-pham-van-mach', '', '', 'Tin hot nhất trong ngày - Trương Quỳnh Anh khoe chân dài sexy, thân mật bên Phạm Văn Mách', '1:40', NULL, 29, NULL, '', '', NULL, '2015-08-31 04:08:56', '2015-08-31 04:08:56', 1, 0, '4'),
-(59, 'Những cặp đôi sao Việt tái hợp sau ồn ào đổ vỡ', 'nhung-cap-doi-sao-viet-tai-hop-sau-on-ao-do-vo', '', '', 'Những cặp đôi sao Việt tái hợp sau ồn ào đổ vỡ', '1:20', NULL, 29, NULL, '', '', NULL, '2015-08-31 04:09:42', '2015-08-31 04:09:42', 1, 0, '4'),
-(60, 'Thúy Nga 115 Paris by night 116 - HAY NHẤT 2015', 'thuy-nga-115-paris-by-night-116-hay-nhat-2015', '', '', 'Thúy Nga 115 Paris by night 116 - HAY NHẤT 2015', '', 1, 29, NULL, '', '', NULL, '2015-08-31 04:10:07', '2015-08-31 04:10:07', 1, 0, '4'),
-(61, 'Asia 77 - Liên Khúc Nhạc Vàng Hay Nhất | Dòng Nhạc Anh Bằng - Lam Phương - Disc 1', 'asia-77-lien-khuc-nhac-vang-hay-nhat-dong-nhac-anh-bang-lam-phuong-disc-1', '', '', 'Asia 77 - Liên Khúc Nhạc Vàng Hay Nhất | Dòng Nhạc Anh Bằng - Lam Phương - Disc 1', '1:33:35', 1, 29, NULL, '', '', NULL, '2015-08-31 04:10:51', '2015-08-31 04:10:51', 1, 0, '4'),
-(62, 'Quy trình Kỹ xảo điện ảnh trong các phim nổi tiếng', 'quy-trinh-ky-xao-dien-anh-trong-cac-phim-noi-tieng', '', '', 'Quy trình Kỹ xảo điện ảnh trong các phim nổi tiếng', '3:17', 2, 29, NULL, '', '', NULL, '2015-08-31 04:12:51', '2015-08-31 04:12:51', 1, 0, '4'),
-(63, 'Một khi anh đã "cứng" thì phải "cứng" như thế này :3', 'mot-khi-anh-da-cung-thi-phai-cung-nhu-the-nay-3', '', '', 'Một khi anh đã "cứng" thì phải "cứng" như thế này :3', '0:24', NULL, 29, NULL, '', '', NULL, '2015-08-31 04:13:36', '2015-08-31 04:13:36', 1, 0, '4');
 
 -- --------------------------------------------------------
 
@@ -309,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `groupID`, `mobile`, `home_phone`, `first_name`, `last_name`, `address`, `city`, `province_state`, `zip_code`, `country`, `suppliers`, `cdate`, `mdate`, `template_id`, `status`, `lastvisit`, `activeCode`, `params`) VALUES
-(28, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', 25, '', '', 'admin', 'admin', '', '', '', '', 0, '', 0, 2014, 0, 1, '2015-10-21 14:53:47', '', ''),
+(28, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', 25, '', '', 'admin', 'admin', '', '', '', '', 0, '', 0, 2014, 0, 1, '2015-10-21 22:56:14', '', ''),
 (20, 'anhvinhvs', 'e10adc3949ba59abbe56e057f20f883e', 'ducdm87@gmail.com', 19, '', '', 'ducdm87', '', '', '', '', '', 0, 'facebook', 1392186072, 2015, 0, 2, '2014-02-12 14:34:00', '', ''),
 (7, 'ducdm@binhhoang.com', '25f9e794323b453885f5181f1b624d0b', 'ducdm@binhhoang.com', 19, '', '', 'ducdm', '', '', '', '', '', 0, '', 1389770555, 2014, 0, 1, '2014-01-16 10:04:50', '2ed194a21f0735a76ee4358192533784:1389840767', ''),
 (8, 'dinhbang19@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'dinhbang19@gmail.com', 19, '', '', 'dinhbang19', '', '', '', '', '', 0, '', 1389841867, 2015, 0, 1, '2014-01-16 10:15:45', '17bb5d16f6e732bfddcc11d63a584a6a:1389841867', ''),
@@ -395,6 +332,72 @@ INSERT INTO `tbl_user_metas` (`meta_id`, `user_id`, `meta_key`, `meta_value`) VA
 (18, 35, 'month', '1'),
 (19, 35, 'year', '1963'),
 (20, 35, 'gander', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_videos`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_videos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `alias` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `actor` varchar(255) DEFAULT NULL,
+  `info` text,
+  `linkyoutube` varchar(255) NOT NULL,
+  `videocode` text NOT NULL,
+  `videourl` text NOT NULL,
+  `duration` varchar(255) DEFAULT NULL,
+  `viewed` int(11) DEFAULT NULL,
+  `category_id` bigint(20) NOT NULL,
+  `director` varchar(255) DEFAULT NULL,
+  `rating` int(11) DEFAULT NULL,
+  `cdate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `mdate` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `status` int(11) NOT NULL,
+  `feature` tinyint(4) NOT NULL,
+  `type` varchar(30) NOT NULL,
+  `metakey` varchar(255) NOT NULL,
+  `metadesc` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `category_id` (`category_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
+
+--
+-- Dumping data for table `tbl_videos`
+--
+
+INSERT INTO `tbl_videos` (`id`, `title`, `alias`, `image`, `actor`, `info`, `linkyoutube`, `videocode`, `videourl`, `duration`, `viewed`, `category_id`, `director`, `rating`, `cdate`, `mdate`, `status`, `feature`, `type`, `metakey`, `metadesc`) VALUES
+(36, 'Answer for "Get month name from Date using JavaScript"', 'answer-for-get-month-name-from-date-using-javascript', '/uploads/images/26/08/2015/1440302798-1439290851-trang-diem-dv1%5B1%5D.jpg', 'Asian', 'sf 34r34r3r34r34', '', '', '', '3', 3, 28, NULL, NULL, '2015-08-26 11:58:29', '2015-08-26 11:58:29', 1, 0, '1', '', ''),
+(37, 'Ke O Mien Xa - Dan Nguyen', 'ke-o-mien-xa-dan-nguyen', '/uploads/images/26/08/2015/1440468146-1440467967-1%5B1%5D.jpg', 'Asian', 'lá jhasj dbahbd hakgdskhadgsasgi đáiátdá', '', '', '', '3', 1, 28, NULL, NULL, '2015-08-27 03:43:59', '2015-08-27 03:43:59', 1, 0, '1', '', ''),
+(38, 'Rừng Lá Thấp', 'rung-la-thap', NULL, 'Japan', 'bhagdkahgsdasjdasdasd', '', '', '', '3:55', NULL, 29, NULL, NULL, '2015-08-27 04:51:06', '2015-08-27 04:51:06', 1, 0, '1', '', ''),
+(39, 'Hai con nai', 'hai-con-nai', '/uploads/images/27/08/2015/vn.png', 'áldasdas', 'uaosy gauygskygakyudgayusd7o6atd7 62thasd gaygsdkjashd', '', '', '', '3', 8, 29, NULL, NULL, '2015-08-27 06:08:22', '2015-08-27 06:08:22', 1, 0, '1', '', ''),
+(40, 'Troubleshooting', 'troubleshooting', '/uploads/images/27/08/2015/Big_Buck_Bunny_Trailer_480x270.png', 'Asian', 'A great all rounder. The net tab can disable cache and allow you to review server response and MIME types easily', '', '', '', '3', NULL, 27, NULL, NULL, '2015-08-27 08:52:50', '2015-08-27 08:52:50', 1, 0, '1', '', ''),
+(41, 'Video Hài Hước - Top 10 Pha Bóng Đá Hài Hước Khó Đỡ Nhất', 'video-hai-huoc-top-10-pha-bong-da-hai-huoc-kho-do-nhat', '/uploads/images/28/08/2015/dong0467-1440726511_490x294.jpg', '', 'khonf co mo ta nao', '', '', '', '', 1, 32, NULL, NULL, '2015-08-28 05:39:42', '2015-08-28 05:39:42', 1, 1, '2', '', ''),
+(42, '10 pha bóng hài hước nhất thế giới bóng đá', '10-pha-bong-hai-huoc-nhat-the-gioi-bong-da', '', '', '10 pha bóng hài hước nhất thế giới bóng đá', '', '', '', '', 3, 29, NULL, NULL, '2015-08-28 04:32:41', '2015-08-28 04:32:41', 1, 0, '1', '', ''),
+(43, 'KĨ THUẬT CỦA HAI SIÊU SAO BÓNG ĐÁ HÀNG ĐẦU THẾ GIỚI', 'ki-thuat-cua-hai-sieu-sao-bong-da-hang-dau-the-gioi', '/uploads/images/28/08/2015/CNbhcx6WIAA3Hrd-5422-1440716111.png', '', 'KĨ THUẬT CỦA HAI SIÊU SAO BÓNG ĐÁ HÀNG ĐẦU THẾ GIỚI', '', '', '', '', 1, 32, NULL, NULL, '2015-08-28 05:46:10', '2015-08-28 05:46:10', 1, 1, '2', '', ''),
+(44, 'Messi và những pha đi bóng thần thánh', 'messi-va-nhung-pha-di-bong-than-thanh', '', '', 'Messi và những pha đi bóng thần thánh', '', '', '', '', NULL, 32, NULL, NULL, '2015-08-28 04:47:49', '2015-08-28 04:47:49', 1, 0, '2', '', ''),
+(45, 'Ronaldinho & Messi ● THE MOVIE ● Two Legends - One Story || HD', 'ronaldinho-messi-the-movie-two-legends-one-story-hd', '/uploads/images/28/08/2015/tag-reuters-1-5897-1440697725-7716-8563-1440716111.jpg', '', 'Ronaldinho & Messi ● THE MOVIE ● Two Legends - One Story || HD', '', '', '', '', 4, 32, NULL, NULL, '2015-08-28 05:48:09', '2015-08-28 05:48:09', 1, 1, '2', '', ''),
+(46, 'Hài miền Bắc: Căn bệnh kỳ lạ, Quang Thắng, Công Lý', 'hai-mien-bac-can-benh-ky-la-quang-thang-cong-ly', '', 'VN', 'asvdhg kaygadskyu gidasid đâs', '', '', '', '14:55', NULL, 29, NULL, NULL, '2015-08-31 03:38:28', '2015-08-31 03:38:28', 1, 0, '3', '', ''),
+(47, 'Hài miền Bắc: Rắn nổi, Chiến Thắng, Công Lý', 'hai-mien-bac-ran-noi-chien-thang-cong-ly', '', '', 'Hài miền Bắc: Rắn nổi, Chiến Thắng, Công Lý', '', '', '', '14:41', NULL, 29, NULL, NULL, '2015-08-31 03:40:55', '2015-08-31 03:40:55', 1, 0, '3', '', ''),
+(48, 'Hài miền Bắc: Đổi đời, Công Lý, Anh Tuấn, Thanh Tú', 'hai-mien-bac-doi-doi-cong-ly-anh-tuan-thanh-tu', '', '', 'Hài miền Bắc: Đổi đời, Công Lý, Anh Tuấn, Thanh Tú', '', '', '', '14:55', NULL, 29, NULL, NULL, '2015-08-31 03:44:43', '2015-08-31 03:44:43', 1, 0, '3', '', ''),
+(49, 'Hài miền Bắc: Đàn bà thời nay', 'hai-mien-bac-dan-ba-thoi-nay', '', 'Japan', 'Hài miền Bắc: Đàn bà thời nay', '', '', '', '9:28', NULL, 29, NULL, NULL, '2015-08-31 03:49:09', '2015-08-31 03:49:09', 1, 0, '3', '', ''),
+(50, 'Hài miền Bắc: MC làng, Anh Quân, Quốc Trị', 'hai-mien-bac-mc-lang-anh-quan-quoc-tri', '', '', 'Hài miền Bắc: MC làng, Anh Quân, Quốc Trị', '', '', '', '', 1, 27, NULL, NULL, '2015-08-31 03:50:42', '2015-08-31 03:50:42', 1, 0, '3', '', ''),
+(51, 'Hài miền Bắc: Đổi đời, Công Lý, Anh Tuấn, Thanh Tú', 'hai-mien-bac-doi-doi-cong-ly-anh-tuan-thanh-tu', '', '', 'Hài miền Bắc: Đổi đời, Công Lý, Anh Tuấn, Thanh Tú', '', '', '', '14:55', NULL, 29, NULL, NULL, '2015-08-31 03:51:26', '2015-08-31 03:51:26', 1, 0, '1', '', ''),
+(52, '[Phim Hài] Bình Luận Bóng Đá | Chiến Thắng , Quang Tèo Mai Thỏ', 'phim-hai-binh-luan-bong-da-chien-thang-quang-teo-mai-tho', '', '', '[Phim Hài] Bình Luận Bóng Đá | Chiến Thắng , Quang Tèo Mai Thỏ', '', '', '', '9:56', NULL, 29, NULL, NULL, '2015-08-31 03:52:22', '2015-08-31 03:52:22', 1, 0, '3', '', ''),
+(53, 'Phim Hài Ngắn Hay Nhất | Tuyển Dụng Gái Mát Xa', 'phim-hai-ngan-hay-nhat-tuyen-dung-gai-mat-xa', '', '', 'Phim Hài Ngắn Hay Nhất | Tuyển Dụng Gái Mát Xa', '', '', '', '23:55', 2, 29, NULL, NULL, '2015-08-31 03:55:58', '2015-08-31 03:55:58', 1, 0, '3', '', ''),
+(54, '[Phim Hài] Các Em Ấy Khỏe Lắm - Mai Thỏ, Quang Tèo, Trung Hiếu', 'phim-hai-cac-em-ay-khoe-lam-mai-tho-quang-teo-trung-hieu', '', '', '[Phim Hài] Các Em Ấy Khỏe Lắm - Mai Thỏ, Quang Tèo, Trung Hiếu', '', '', '', '', NULL, 29, NULL, NULL, '2015-08-31 03:57:39', '2015-08-31 03:57:39', 1, 0, '3', '', ''),
+(55, 'Môn thể thao bựa nhất trong lịch sử =))', 'mon-the-thao-bua-nhat-trong-lich-su', '', '', 'Môn thể thao bựa nhất trong lịch sử =))', '', '', '', '', NULL, 32, NULL, NULL, '2015-08-31 04:01:45', '2015-08-31 04:01:45', 1, 1, '2', '', ''),
+(56, '[Thể Thao 24h] - Thụy Điển 2 - 3 Bồ Đào Nha Tổng 2 - 4, Lượt về play off vòng loại World Cup 2014', 'the-thao-24h-thuy-dien-2-3-bo-dao-nha-tong-2-4-luot-ve-play-off-vong-loai-world-cup-2014', '', '', '[Thể Thao 24h] - Thụy Điển 2 - 3 Bồ Đào Nha Tổng 2 - 4, Lượt về play off vòng loại World Cup 2014', '', '', '', '2:27', 1, 32, NULL, NULL, '2015-08-31 04:03:22', '2015-08-31 04:03:22', 1, 1, '1', '', ''),
+(57, 'Tin điện ảnh| Trương Quỳnh Anh được Tim tặng xế hộp sau khi làm lành', 'tin-dien-anh-truong-quynh-anh-duoc-tim-tang-xe-hop-sau-khi-lam-lanh', '', '', 'Tin điện ảnh| Trương Quỳnh Anh được Tim tặng xế hộp sau khi làm lành', '', '', '', '1:22', NULL, 29, NULL, NULL, '2015-08-31 04:08:12', '2015-08-31 04:08:12', 1, 0, '4', '', ''),
+(58, 'Tin hot nhất trong ngày - Trương Quỳnh Anh khoe chân dài sexy, thân mật bên Phạm Văn Mách', 'tin-hot-nhat-trong-ngay-truong-quynh-anh-khoe-chan-dai-sexy-than-mat-ben-pham-van-mach', '', '', 'Tin hot nhất trong ngày - Trương Quỳnh Anh khoe chân dài sexy, thân mật bên Phạm Văn Mách', '', '', '', '1:40', NULL, 29, NULL, NULL, '2015-08-31 04:08:56', '2015-08-31 04:08:56', 1, 0, '4', '', ''),
+(59, 'Những cặp đôi sao Việt tái hợp sau ồn ào đổ vỡ', 'nhung-cap-doi-sao-viet-tai-hop-sau-on-ao-do-vo', '', '', 'Những cặp đôi sao Việt tái hợp sau ồn ào đổ vỡ', '', '', '', '1:20', NULL, 29, NULL, NULL, '2015-08-31 04:09:42', '2015-08-31 04:09:42', 1, 0, '4', '', ''),
+(60, 'Thúy Nga 115 Paris by night 116 - HAY NHẤT 2015', 'thuy-nga-115-paris-by-night-116-hay-nhat-2015', '', '', 'Thúy Nga 115 Paris by night 116 - HAY NHẤT 2015', '', '', '', '', 1, 29, NULL, NULL, '2015-08-31 04:10:07', '2015-08-31 04:10:07', 1, 0, '4', '', ''),
+(61, 'Asia 77 - Liên Khúc Nhạc Vàng Hay Nhất | Dòng Nhạc Anh Bằng - Lam Phương - Disc 1', 'asia-77-lien-khuc-nhac-vang-hay-nhat-dong-nhac-anh-bang-lam-phuong-disc-1', '', '', 'Asia 77 - Liên Khúc Nhạc Vàng Hay Nhất | Dòng Nhạc Anh Bằng - Lam Phương - Disc 1', '', '', '', '1:33:35', 1, 29, NULL, NULL, '2015-08-31 04:10:51', '2015-08-31 04:10:51', 1, 0, '4', '', ''),
+(62, 'Quy trình Kỹ xảo điện ảnh trong các phim nổi tiếng', 'quy-trinh-ky-xao-dien-anh-trong-cac-phim-noi-tieng', '/uploads/images/21/10/2015/duong-ve-nha.jpg', '', 'Quy trình Kỹ xảo điện ảnh trong các phim nổi tiếng', '', 'dád', 'dád', '3:17', 2, 29, NULL, NULL, '2015-08-31 04:12:51', '2015-10-21 23:59:50', 1, 1, '4', 'dád', 'ad'),
+(63, 'Một khi anh đã "cứng" thì phải "cứng" như thế này :3', 'mot-khi-anh-da-cung-thi-phai-cung-nhu-the-nay-3', '', '', 'Một khi anh đã "cứng" thì phải "cứng" như thế này :3', '', '', '', '0:24', NULL, 29, NULL, NULL, '2015-08-31 04:13:36', '2015-10-21 22:28:20', 1, 1, '4', '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
