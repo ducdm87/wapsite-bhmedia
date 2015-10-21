@@ -61,17 +61,17 @@ class PostsController extends BackendController {
             if (isset($data['id']) && $data['id']) {
                 if (!$this->post_model->updatePost($data)) {
 
-                    YError::raseWarning("Update bean has success!.");
+                    YiiMessage::raseSuccess("Update bean has success!.");
                 } else {
-                    YError::raseNotice("Error! Update fail!.");
+                    YiiMessage::raseWarning("Error! Update fail!.");
                 }
             } else {
                 if (!$this->post_model->addPost($data)) {
                     // Create folder
                     //$this->createFolder($data);
-                    YError::raseWarning("Create bean has success!.");
+                    YiiMessage::raseSuccess("Create bean has success!.");
                 } else {
-                    YError::raseNotice("Error! Created fail!.");
+                    YiiMessage::raseWarning("Error! Created fail!.");
                 }
             }
             $this->redirect($this->createUrl("/posts"));
@@ -81,10 +81,10 @@ class PostsController extends BackendController {
     private function deletePost($id) {
         if (!$this->post_model->deleteRecord($id)) {
 
-            YError::raseWarning("Delete bean has success!.");
+            YiiMessage::raseSuccess("Delete bean has success!.");
         } else {
 
-            YError::raseNotice("Error! Delete fail!.");
+            YiiMessage::raseWarning("Error! Delete fail!.");
         }
         $this->redirect($this->createUrl("/posts"));
     }

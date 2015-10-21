@@ -68,15 +68,15 @@ class FilmsController extends BackEndController {
             }
             if (isset($data['film']['id']) && $data['film']['id']) {
                 if (!$this->film_model->updateMedia($data)) {
-                    YError::raseWarning("Update bean has success!.");
+                    YiiMessage::raseSuccess("Update bean has success!.");
                 } else {
-                    YError::raseNotice("Error! Update fail!.");
+                    YiiMessage::raseWarning("Error! Update fail!.");
                 }
             } else {
                 if (!$this->film_model->addMedia($data)) {
-                    YError::raseWarning("Create bean has success!.");
+                    YiiMessage::raseSuccess("Create bean has success!.");
                 } else {
-                    YError::raseNotice("Error! Created fail!.");
+                    YiiMessage::raseWarning("Error! Created fail!.");
                 }
             }
 
@@ -88,10 +88,10 @@ class FilmsController extends BackEndController {
     private function deleteMedia($id) {
         if (!$this->film_model->deleteRecord($id)) {
 
-            YError::raseWarning("Delete bean has success!.");
+            YiiMessage::raseSuccess("Delete bean has success!.");
         } else {
 
-            YError::raseNotice("Error! Delete fail!.");
+            YiiMessage::raseWarning("Error! Delete fail!.");
         }
         $this->redirect($this->createUrl("/films"));
     }

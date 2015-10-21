@@ -40,7 +40,7 @@ class UserController extends FrontEndController {
 
     public function actionLogin() {
         // collect user input data
-//        YError::raseNotice("Type your email and password");
+//        YiiMessage::raseWarning("Type your email and password");
         if (Request::getVar('LoginForm', "")) {
             global $mainframe, $db;
             $model = new UserForm();

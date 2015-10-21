@@ -25,7 +25,7 @@ class YiiElement
         $className = ucfirst($node['type'])."Element";
         if(!class_exists($className))
         {
-            YError::raseNotice("Element ".$node['type']." is not existing ");
+            YiiMessage::raseWarning("Element ".$node['type']." is not existing ");
             return false;
         }
         

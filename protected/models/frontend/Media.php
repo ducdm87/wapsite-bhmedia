@@ -140,6 +140,40 @@ class Media extends CFormModel {
                 ->where('fid=:fid', array('fid' => $fid))
                 ->queryRow();
         return $query;
+    } 
+    
+    
+    function getItems($catID = null, $feature = 0, $limit = 10, $start = 0)
+    {
+//        filter_order, filter_order_Dir, limit, limitstart
+        $filter_order = Request::getVar('filter_order','viewed');
+        $filter_order_Dir = Request::getVar('filter_order_Dir','DESC');
+        $command = Yii::app()->db->createCommand();
+        
+        $command->limit($limit, $start);
+        $command->order("$filter_order $filter_order_Dir");
+        $command->where("c.id = $catID");
+        if($feature == 1)
+            $command->where("a.feature = 1");
+        
+        $results = $command->select('a.*,c.title as name,c.alias as calias, c.id as cid,ep.*,lk.*')
+                ->from("$this->table  a")
+                ->join("$this->table_categories  c", 'a.category_id=c.id')
+                ->join("$this->table_episode  ep", 'a.id=ep.film_id')
+                ->leftjoin("$this->table_like lk", "a.id=lk.fid")
+                ->queryAll();
+        return $results;
+    }
+    
+    function getCategoryByAlias($catAlias){
+         $command = $this->command->select('*')
+                ->from("$this->table_categories")
+                ->where("alias=:alias");
+         $command->bindValue(":alias", $catAlias);
+         $item = $command->queryRow();
+                 
+         
+        return $item;
     }
 
 }

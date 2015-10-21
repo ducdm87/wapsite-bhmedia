@@ -68,7 +68,7 @@ class BackEndController extends CController {
         $app = Yii::app();
         if ($mainframe->isLogin()) {
             if (!$mainframe->isAdmin()) {
-                YError::raseNotice("Your account not have permission to visit backend page");
+                YiiMessage::raseWarning("Your account not have permission to visit backend page");
                 Yii::app()->session['userbackend'] = null;
                 $this->redirect(array('user/logout'));
                 return;

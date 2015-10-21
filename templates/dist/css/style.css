@@ -9,6 +9,47 @@ and open the template in the editor.
 */
 
 
+.width-5{ 	width: 5%; }
+.width-10{ 	width: 10%; }
+.width-15{ 	width: 15%; }
+.width-20{ 	width: 20%; }
+.width-25{ 	width: 25%; }
+.width-30{ 	width: 30%; }
+.width-35{ 	width: 35%; }
+.width-40{ 	width: 40%; }
+.width-45{ 	width: 45%; }
+.width-48{ 	width: 48%; }
+.width-50{ 	width: 50%; }
+.width-55{ 	width: 55%; }
+.width-60{ 	width: 60%; }
+.width-65{ 	width: 65%; }
+.width-70{ 	width: 70%; }
+.width-75{ 	width: 75%; }
+.width-80{ 	width: 80%; }
+.width-85{ 	width: 85%; }
+.width-90{ 	width: 90%; }
+.width-95{ 	width: 95%; }
+
+.width5{ 	width: 50px; }
+.width10{ 	width: 100px; }
+.width15{ 	width: 150px; }
+.width20{ 	width: 200px; }
+.width25{ 	width: 250px; }
+.width30{ 	width: 300px; }
+.width35{ 	width: 350px; }
+.width40{ 	width: 400px; }
+.width45{ 	width: 450px; }
+.width50{ 	width: 500px; }
+.width55{ 	width: 550px; }
+.width60{ 	width: 600px; }
+.width65{ 	width: 650px; }
+.width70{ 	width: 700px; }
+.width75{ 	width: 750px; }
+.width80{ 	width: 800px; }
+.width85{ 	width: 850px; }
+.width90{ 	width: 900px; }
+.width95{ 	width: 950px; }
+
 .container-fluid{
     position: relative;
     display: block;
@@ -45,25 +86,29 @@ and open the template in the editor.
 }
 
 .navbar-brand{
-    height: 150px;
+    height: 100px;
     clear: both;
 }
-
+.navbar-brand img{ height: 80px; }
 .nav-main .navbar{
     background: url(../../../images/icons/nav.png) repeat-x;
-    height: 65px;
+    height: 41px;     
+    overflow: hidden;
+    width: 100%;
+    margin: 0px;
+    min-height: auto;
 }
-.nav-main .navbar{
-    margin-bottom: 0px;
-}
-.nav-main .navbar-nav {
-    margin: 7.5px -15px;
-}
+
+.alert{ padding: 5px; margin: 0; }
+
+#wrapper .banner{ height: 200px; overflow: hidden; }
+#wrapper .banner img{ height: 200px; overflow: hidden;  width: 100%; }
 
 .navbar-nav>li>a{
     font-weight: 600;
     font-size: 16px;
-    line-height: 25px;
+    line-height: 30px;
+    padding: 5px 0;
 }
 .navbar-nav>li>a{
     padding-right: 70px;
@@ -127,7 +172,7 @@ and open the template in the editor.
     border-radius: 0px;
 }
 .dialog-message p{
-    font-size: 17px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -136,46 +181,51 @@ and open the template in the editor.
 }
 .entry-container .entry-header{
     background: url(../../../images/app/entry-header.png) repeat-x;
-    height: 50px;
+    height: 32px;
+    overflow: hidden;
 }
 .entry-container .entry-header{
-    margin-bottom: 30px;   
+    margin-bottom: 15px;   
 }
-.entry-container .entry-header .entry-title{
-    background: url(../../../images/app/entry-title.png) no-repeat;
-    height: 50px;
+
+.entry-container .entry-header .entry-title .box-bg-left{ 
+     background: url(../../../images/app/btn-box-left.png) no-repeat;
+     padding: 0 0 0 10px;
 }
-.entry-container .entry-header .entry-title-news{
-    background: url(../../../images/app/entry-title-news.png) no-repeat;
-    height: 50px;
+.entry-container .entry-header .entry-title .box-bg-right{  
+    background: url(../../../images/app/btn-box-right.png) no-repeat scroll right 0; 
+    padding: 0 22px 0 0px;
+    display: inline-block;  
 }
-.entry-container .entry-header .entry-title span{
-    position: relative;
-    left: 35px;
-    font-size: 20px;
-    font-weight: bold;
+.entry-container .entry-header .entry-title .box-bg-center{  
+    background: url(../../../images/app/btn-box-center.png) repeat-x; 
     color: #fff;
-    line-height: 50px;
+    font-size: 18px;    
+    line-height: 32px;
+    position: relative;
+    padding: 0 5px 0 10px;
 }
-.entry-container .entry-body .thumbnail{
-    border: 2px solid #afcf4a;
-    padding: 1px;
+
+.entry-container .entry-body{  
+    margin: 0 10px;
 }
+ 
+ 
 .entry-container .entry-body .thumbnail .icon-play{
-    background: url(../../../images/app/icon-play.png) no-repeat;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 25%;
-    left: 35%;
+    background: rgba(0, 0, 0, 0) url("../../../images/app/icon-play.png") no-repeat scroll center center;
     display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
 }
 .entry-header{
 
 }
 .entry-all{
     position: relative;
-    top: -35px;
+    top: -26px;
     right: 20px;
 
 }
@@ -237,7 +287,7 @@ and open the template in the editor.
     position: relative;
 }
 .entry-thunb img{
-    border: 1px solid #afcf4a;
+
 }
 .entry_time{
     position: absolute;
@@ -250,27 +300,43 @@ and open the template in the editor.
     color: #fff;
 }
 .entry-body .thumbnail{
+    border: 2px solid #afcf4a;
+    height: 276px;
+    margin: 0;
+    padding: 0;
     position: relative;
+}
+.entry-body .thumbnail img{
+    height: 100%;
+    width: 100%;
 }
 .entry-body .thumbnail .caption{
     /*position: absolute; bottom: 0;*/
-    background: #0e1501;
+     padding: 9px;
+    position: absolute;
+    width: 100%;
+     background: #0e1501 none repeat scroll 0 0;
     opacity: 0.8;
+    bottom: 0;
 }
 .entry-body .thumbnail .caption a{
     color: #fff;
     font-weight: 500;
     text-decoration: none;
 }
+
+.entry-body .row-box{ 
+    margin: 0 0 25px;
+    padding: 0 15px;
+}
 .entry-thunb img{
-    height: 120px;
-    width: 120px;
+    height: 100px;
+    width: 100px;
 }
 .entry-social{
     position: absolute;
     bottom: 0;
 }
-
 
 
 .entry-caption{
@@ -326,16 +392,23 @@ and open the template in the editor.
 
 
 }
-.well {
-    min-height: 20px;
-    padding: 19px;
-    margin-bottom: 20px;
-    background-color: transparent; 
+.page-home .well {
+    background-color: #fefbf1;
     border: 1px solid #e3e3e3;
     border-radius: 4px;
-    -webkit-box-shadow: none; 
-    box-shadow:none; 
+    box-shadow: none;
+    margin-bottom: 0;
+    min-height: 20px;
+    padding: 19px 19px 0;
+    height: 276px;
 }
+
+.page-videos .well{
+    background: none;
+    border: none;
+        box-shadow: none;
+}
+
 .readmore a, .media-heading, .media-heading a{
     color: #f32323;
 }
@@ -349,7 +422,8 @@ and open the template in the editor.
 
 
 footer{
-    background: url(../../../images/app/footer.png) repeat-x;
+    background: #000;
+    border-top: 2px solid #FF0000;
     /*height: 140px;*/
     /*padding-bottom: 30px;*/
 }
@@ -638,4 +712,23 @@ body.users {
     padding: 20px;
     background: #fff;
     min-height: 460px;
+}
+
+
+.more-page{ 
+    background: rgba(0, 0, 0, 0) url("../../../images/app/arrow-more-down.png") no-repeat scroll right 13px;
+    font-size: 17px;
+    font-weight: bold;
+    height: 32px;
+    line-height: 32px;
+    margin: 0 auto;
+    width: 125px;    
+}
+.more-page a{
+    color: #7b7979;
+}
+.more-page a:hover{ color: #337ab7; }
+.page-news-detail .entry-body{
+    text-align: justify;
+    line-height: 22px;
 }

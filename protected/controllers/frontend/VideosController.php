@@ -14,27 +14,20 @@ class VideosController extends FrontEndController {
     private $media;
 
     function init() {
-        parent::init();
-        $this->category = Category::getInstance();
-        $this->post = Post::getInstance();
-        $this->media = Media::getInstance();
+        parent::init();       
+       
+       // $this->category = Category::getInstance();
+        //$this->post = Post::getInstance();
+       // $this->media = Media::getInstance();
     }
 
     public function actionDisplay() {
         $data = array();
         $type = 1;
-        if (isset($_GET['t']) && $_GET['t'] == 'the-thao') {
-            $data['lable'] = 'Thể Thao';
-            $type = 2;
-        } elseif (isset($_GET['t']) && $_GET['t'] == 'hai') {
-             $data['lable'] = 'Hài';
-            $type = 3;
-        } elseif (isset($_GET['t']) && $_GET['t'] == 'dien-anh') {
-             $data['lable'] = 'Điện ảnh';
-            $type = 4;
-        }
-        $data['videos'] = $this->media->getMedias(5, 0, array('m.type' => $type), false, $order = 'm.viewed', $by = "DESC");
-        $data ['allvideos'] = $this->media->getMedias(0, 0, array('m.type' => $type), false, $order = 'm.viewed', $by = "ASC");
+        $model = Media::getInstance();
+         
+        $data['videos'] = $model->getMedias(5, 0, array('m.type' => $type), false, $order = 'm.viewed', $by = "DESC");
+        $data ['allvideos'] = $model->getMedias(0, 0, array('m.type' => $type), false, $order = 'm.viewed', $by = "ASC");
 
         $this->render('default', $data);
     }
@@ -54,6 +47,20 @@ class VideosController extends FrontEndController {
 
         $data['videos'] = $this->getMediaBycategory($data['video']['category_id']);
         $this->render('detail', $data);
+    }
+    
+    function actionCategory(){
+        $model = Media::getInstance();
+        
+        $catAlias = Request::getVar('alias',null);
+        $data['alias'] = $catAlias;
+        $data['category'] = $model->getCategoryByAlias($catAlias);
+        if($data['category'] == false){
+            $this->redirect($this->createUrl("app/"));
+        }
+        $data['items'] = $model->getItems($data['category']['id'], true,5);
+        $data['items2'] = $model->getItems($data['category']['id'], false,9);
+        $this->render('category', $data);
     }
 
     private function getMediaByCategory($cid) {

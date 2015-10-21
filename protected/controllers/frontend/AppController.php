@@ -14,7 +14,7 @@ class AppController extends FrontEndController {
     private $media;
 
     function init() {
-        parent::init();
+        parent::init();        
         $this->category = Category::getInstance();
         $this->post = Post::getInstance();
         $this->media = Media::getInstance();
@@ -24,19 +24,8 @@ class AppController extends FrontEndController {
 
         $data = array();
         $data['videos'] = $this->media->getMedias(5, 0, array('m.type' => 1));
-        if (isset($data['videos']) && $data['videos']) {
-            foreach ($data['videos'] as $key => $video) {
-                if ($key == 0) {
-                    $data['video'][] = $video;
-                } else {
-                    unset($data['videos'][0]);
-                }
-            }
-        }
-
         $data['video_sposrts'] = $this->media->getMedias(5, 0, array('m.type' => 2));
-        $data['posts'] = $this->post->getPosts(5, 0, array('p.status' => 1));
-
+        $data['posts'] = $this->post->getPosts(5, 0, array('p.status' => 1));        
         $this->render('default', $data);
     }
 

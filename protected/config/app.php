@@ -17,15 +17,15 @@ $settings = array(
             'urlFormat' => 'path',
             'rules' => array(
                 // home page
-                '' => array('app/display'),
-                'bieu-do/' => array('benhvienphusan/chart'),
-                'ban-do-cay-xang/<location_alias:[\w-\d]+>' => array('giaxang/maps','urlSuffix'=>'.html','defaultParams'=>array("task"=>"giaxang")),
-                'ban-do-cay-xang/' => array('giaxang/maps','defaultParams'=>array("task"=>"giaxang")),
-               
-                'tin-tuc/' => array('news/display'),
+                '/' => array('app/display'),
+                '' => array('app/'),                             
+
+                'tin-tuc' => array('news/'),                 
                 'tin-tuc/<alias:[\d\w-]+>' => array('news/category'),
                 'tin-tuc/<alias:[\d\w-]+>/trang-<page:[0-9]+>' => array('news/category'),
-                'tin-tuc/<cat_alias:[\d\w-]+>/<cid:[0-9]+>-<alias:.*>' => array('news/detail','urlSuffix'=>'.html'),
+                'tin-tuc/<id:[0-9]+>-<alias:.*>' => array('news/detail','urlSuffix'=>'.html'),
+                          
+                '<alias:[\d\w-]+>' => array('videos/category'), 
             ),
         ),
         

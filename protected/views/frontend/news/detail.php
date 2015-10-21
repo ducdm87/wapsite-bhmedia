@@ -1,21 +1,19 @@
 
-<div class="conatiner">
-    <div class="dialog-message">
-        <div class="alert alert-warning alert-dismissible text-center" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <p>Qúy khách vui lòng đăng nhập <strong>Tại đây</strong> hoặc vui lòng chuyển sang truy cập GPRS/3G/DEGE</p>
-        </div>
-    </div>
-</div>
-<?php if (isset($post) && $post): ?>
+<div class="page-news-detail">        
     <div class="entry-container">
         <div class="entry-header">
-            <div class="container">
-                <div class="entry-title entry-title-news">
-                    <span><?php echo isset($category) ? $category['title'] : 'Khác'; ?></span>
-                </div>
-            </div>
-        </div>
+            <div class="container-fluid">
+                <div class="entry-title">
+                    <div class="box-bg-left">
+                        <div class="box-bg-right">
+                            <div class="box-bg-center">                                
+                               <?php echo isset($category) ? $category['title'] : 'Khác'; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>                    
+            </div> 
+        </div> 
         <div class="entry-body">
             <div class="container">
                 <h4 class="media-heading">
@@ -29,6 +27,6 @@
                 </div>
             </div>
         </div>
-    </div>
-<?php endif; ?>
+    </div>    
+</div>
 

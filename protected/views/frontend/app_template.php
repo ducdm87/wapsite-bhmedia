@@ -94,11 +94,11 @@
                 <div class="container-nav">
                     <nav class="navbar navbar-static-top">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="<?php echo $this->createUrl('/app') ?>" class="active">Home</a></li>
-                            <li><a href="<?php echo $this->createUrl('/news') ?>" class="hidden-xs hidden-sm">Tin Tức</a></li>
-                            <li><a href="/videos?t=the-thao" class="hidden-xs hidden-sm">Thể Thao</a></li>
-                            <li><a href="/videos?t=hai" class="hidden-xs hidden-sm">Hài</a></li>
-                            <li><a href="/videos?t=dien-anh" class="hidden-xs hidden-sm">Điện Ảnh</a></li>
+                            <li class="active"><a href="<?php echo $this->createUrl('app/') ?>" class="active">Home</a></li>
+                            <li><a href="<?php echo $this->createUrl('news/') ?>" class="hidden-xs hidden-sm">Tin Tức</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "the-thao") ); ?>" class="hidden-xs hidden-sm">Thể Thao</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "hai") ); ?>" class="hidden-xs hidden-sm">Hài</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "dien-anh") ); ?>" class="hidden-xs hidden-sm">Điện Ảnh</a></li>                            
                         </ul>
                     </nav>
                 </div>
@@ -106,8 +106,21 @@
             <!--</div>-->
         </header>
         <div id="wrapper">
-            <div class="section">
-                <?php echo $content; ?>
+            <div class="section">                 
+                <div class="container-fluid" style="padding: 0px;">
+                    <div class="banner">
+                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/app/banner.png" alt="Banner" class="img-responsive"/>
+                    </div>
+                    <div class="dialog-message">
+                        <div class="alert alert-warning alert-dismissible text-center" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <p>Qúy khách vui lòng đăng nhập <strong>Tại đây</strong> hoặc vui lòng chuyển sang truy cập GPRS/3G/DEGE</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="page-content">
+                    <?php echo $content; ?>                
+                </div>
             </div>
         </div>
         <footer>
