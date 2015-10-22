@@ -75,7 +75,7 @@ class Media extends CFormModel {
 
         $results = $this->command->select('f.*,c.title as name')
                 ->from("$this->table  f")
-                ->leftJoin("$this->table_categories  c", 'f.category_id=c.id')
+                ->leftJoin("$this->table_categories  c", 'f.catID=c.id')
                 ->queryAll();
 
         return $results;

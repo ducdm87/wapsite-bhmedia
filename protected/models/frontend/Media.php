@@ -59,7 +59,7 @@ class Media extends CFormModel {
         }
         $results = $this->command->select('m.*,c.title as name,c.alias as calias, c.id as cid,ep.*,lk.*')
                 ->from("$this->table  m")
-                ->join("$this->table_categories  c", 'm.category_id=c.id')
+                ->join("$this->table_categories  c", 'm.catID=c.id')
                 ->join("$this->table_episode  ep", 'm.id=ep.film_id')
                 ->leftjoin("$this->table_like lk", "m.id=lk.fid")
                 ->queryAll();
@@ -79,7 +79,7 @@ class Media extends CFormModel {
     }
 
     public function setView($id) {
-        $old_view = $this->get_readview($id);
+        $old_view = $this->get_readview($id);         
         $new_view = isset($old_view['viewed']) ? $old_view['viewed'] + 1 : 1;
         $data = array('viewed' => $new_view);
         $transaction = $this->connection->beginTransaction();
@@ -94,7 +94,7 @@ class Media extends CFormModel {
     }
 
     private function get_readview($id) {
-        $query = $this->command->select('viewed')
+        $query = Yii::app()->db->select('viewed')
                 ->from($this->table)
                 ->where('id=:id', array('id' => $id))
                 ->queryRow();
@@ -159,7 +159,7 @@ class Media extends CFormModel {
         
         $items = $command->select('a.*,c.title as name,c.alias as calias, c.id as cid,ep.*,lk.*')
                 ->from("$this->table  a")
-                ->join("$this->table_categories  c", 'a.category_id=c.id')
+                ->join("$this->table_categories  c", 'a.catID=c.id')
                 ->join("$this->table_episode  ep", 'a.id=ep.film_id')
                 ->leftjoin("$this->table_like lk", "a.id=lk.fid")
                 ->queryAll();
@@ -181,6 +181,46 @@ class Media extends CFormModel {
          $item = $command->queryRow();
                  
          
+        return $item;
+    }
+    
+    function getItem($id){
+        $command = Yii::app()->db->createCommand();
+        $where = array();
+        $where[] = " a.status = 1 ";
+        $where[] = " a.id = $id ";
+        $where[] = " b.status = 1 ";
+        $command->where(implode(" AND ", $where));
+        
+        $item = $command->select('a.*,b.title cat_title, b.alias cat_alias')
+                ->from("$this->table  a")                
+                ->leftjoin("$this->table_categories  b", 'a.catID=b.id')
+                ->queryRow();
+        $item['slug'] = $item['id']."-".$item['alias'];
+        $item['catslug'] = $item['catID']."-".$item['cat_alias'];
+        $item['link'] = Yii::app()->createUrl("videos/detail", array("id"=>$item['id'],"alias"=>$item['alias']));
+        $item['link_view'] = Yii::app()->createUrl("videos/setview", array("id"=> $item['id']));
+//        $item['link2'] = Yii::app()->createUrl("videos/detail", array("alias"=>$item['alias']));
+        $item['catlink'] = Yii::app()->createUrl("videos/category", array("alias"=>$item['cat_alias']));
+        return $item;
+    }
+    
+    function getItemByAlias($alias){
+        $command = Yii::app()->db->createCommand();
+        $where = array();
+        $where[] = " a.status = 1 ";
+        $where[] = " a.alias = '$alias' ";
+        $where[] = " b.status = 1 ";
+        $command->where(implode(" AND ", $where));
+        
+        $item = $command->select('a.*,b.title cat_title, b.alias cat_alias')
+                ->from("$this->table  a")                
+                ->leftjoin("$this->table_categories  b", 'a.catID=b.id')
+                ->queryRow();
+        $item['slug'] = $item['id']."-".$item['alias'];
+        $item['catslug'] = $item['catID']."-".$item['cat_alias'];
+        $item['link'] = Yii::app()->createUrl("videos/detail", array("id"=>$item['id'],"alias"=>$item['alias']));       
+        $item['catlink'] = Yii::app()->createUrl("videos/category", array("alias"=>$item['cat_alias']));
         return $item;
     }
 

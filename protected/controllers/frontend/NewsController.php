@@ -15,7 +15,6 @@ class NewsController extends FrontEndController {
     public function actionDisplay() {
         $data = array();
 
-
         $data['categories'] = $this->category->getCategories(10, 0, array('type' => NEWS_TYPE));
         if (isset($data['categories']) && $data['categories']) {
             foreach ($data['categories'] as $key => $category) {

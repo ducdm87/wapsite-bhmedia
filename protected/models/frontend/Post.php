@@ -8,7 +8,7 @@
 
 class Post extends CFormModel {
 
-    private $table = "{{posts}}";
+    private $table = "{{articles}}";
     private $table_categories = "{{categories}}";
     private $command;
     private $connection;

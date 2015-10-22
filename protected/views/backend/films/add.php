@@ -141,7 +141,7 @@
                                 <?php if (isset($categories) && $categories): ?>
 
                                     <?php foreach ($categories as $category): ?>
-                                        <option value="<?php echo $category['id'] ?>" <?php echo isset($item['category_id']) && ($item['category_id'] == $category['id']) ? 'selected' : '' ?>><?php echo $category['title'] ?></option>
+                                        <option value="<?php echo $category['id'] ?>" <?php echo isset($item['catID']) && ($item['catID'] == $category['id']) ? 'selected' : '' ?>><?php echo $category['title'] ?></option>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </select>

@@ -49,30 +49,23 @@
 
                 <li class="<?php if ($controll == "menus") echo "active current"; ?>"><a href="<?php echo $this->createUrl('menus/menutypes'); ?>"><i class="fa fa-file"></i> Menus</a></li>
 
-                <li class="dropdown">
+                <li class="dropdown <?php if ($controll == "categories" OR $controll == "videos") echo "active current"; ?>">
                     <a href="#" class="dropdown-toggle parent" data-toggle="dropdown">
                         <i class="fa fa-caret-square-o-down"></i> Applications 
                         <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-<!--                        <li class="<?php if ($controll == "services") echo "active"; ?>">
-                            <a href="<?php echo $this->createUrl('services/'); ?>">Services</a>
-                        </li>-->
                         <li class="<?php if ($controll == "categories") echo "active"; ?>">
                             <a href="<?php echo $this->createUrl('categories/'); ?>">Categories</a>
                         </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle parent" data-toggle="dropdown">
-                        <i class="fa fa-film"></i> Post 
-                        <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li class="<?php if ($controll == "film") echo "active"; ?>">
-                            <a href="<?php echo $this->createUrl('posts/'); ?>">Posts</a>
+                        <li class="<?php if ($controll == "Articles") echo "active"; ?>">
+                            <a href="<?php echo $this->createUrl('articles/'); ?>">Articles</a>
                         </li>
-
+                        <li class="<?php if ($controll == "videos") echo "active"; ?>">
+                            <a href="<?php echo $this->createUrl('videos/'); ?>">Videos</a>
+                        </li>
                     </ul>
                 </li>
+                 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle parent" data-toggle="dropdown">
                         <i class="fa fa-film"></i> Media 

@@ -53,7 +53,7 @@ class FilmsController extends BackEndController {
                 'alias' => Request::getVar('alias', ''),
                 'actor' => Request::getVar('actor', ''),
                 'duration' => Request::getVar('duration', ''),
-                'category_id' => Request::getVar('category', ''),
+                'catID' => Request::getVar('category', ''),
                 'info' => Request::getVar('info', ''),
                 'film_year' => Request::getVar('film_year', ''),
                 'film_area' => Request::getVar('film_area', ''),

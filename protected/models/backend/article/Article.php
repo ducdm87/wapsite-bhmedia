@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-class Post extends CFormModel {
+class Article extends CFormModel {
 
     private $table = "{{articles}}";
     private $table_categories = "{{categories}}";
@@ -24,7 +24,7 @@ class Post extends CFormModel {
         static $instance;
 
         if (!is_object($instance)) {
-            $instance = new Post();
+            $instance = new Article ();
         }
         return $instance;
     }

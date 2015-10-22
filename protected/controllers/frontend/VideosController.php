@@ -18,13 +18,13 @@ class VideosController extends FrontEndController {
        
        // $this->category = Category::getInstance();
         //$this->post = Post::getInstance();
-       // $this->media = Media::getInstance();
+        $this->media = Media::getInstance();
     }
 
     public function actionDisplay() {
         $data = array();
         $type = 1;
-        $model = Media::getInstance();
+        $model = Video::getInstance();
          
         $data['videos'] = $model->getMedias(5, 0, array('m.type' => $type), false, $order = 'm.viewed', $by = "DESC");
         $data ['allvideos'] = $model->getMedias(0, 0, array('m.type' => $type), false, $order = 'm.viewed', $by = "ASC");
@@ -33,24 +33,30 @@ class VideosController extends FrontEndController {
     }
 
     public function actionDetail() {
-        $id = $_GET['id'];
+        $id = Request::getVar('id',null);
+        $alias = Request::getVar('alias',null);
 
-        $alias = $_GET['alias'];
-
-        $data['video'] = $this->media->getMediaById($id);
-        if ($data['video']['alias'] != $alias) {
-            if ($error = Yii::app()->errorHandler->error) {
-                $this->render('error', $error);
+        $model =  Video::getInstance();
+        if($id == null OR $id == ""){
+            if($alias != null and $alias != ""){
+                $item = $model->getItemByAlias($alias);
+            }else{
+                header("Location: /");
             }
+        }else{
+            $item = $model->getItem($id);
         }
-        $data['videosRand'] = $this->getMediaRand();
-
-        $data['videos'] = $this->getMediaBycategory($data['video']['category_id']);
+        
+        $items = $model->getItems($item['catID'], true,4);
+        $items2 = $model->getItems($item['catID'], false,15);
+        $data['item'] = $item;
+        $data['items'] = $items;
+        $data['items2'] = $items2;
         $this->render('detail', $data);
     }
     
     function actionCategory(){
-        $model = Media::getInstance();
+        $model = Video::getInstance();
         
         $catAlias = Request::getVar('alias',null);
         $data['alias'] = $catAlias;
@@ -62,42 +68,36 @@ class VideosController extends FrontEndController {
         $data['items2'] = $model->getItems($data['category']['id'], false,9);
         $this->render('category', $data);
     }
-
-    private function getMediaByCategory($cid) {
-        $media = new Media();
-        $where_param = array('m.category_id' => $cid);
-        return $media->getMedias(4, 0, $where_param);
-    }
-
-    private function getMediaRand() {
-        $media = new Media();
-        return $media->getMedias(6, 0, false, false, $order = 'm.viewed', $by = "DESC", true);
-    }
-
+ 
     public function actionSetView() {
-        if ($res = $this->media->setView($_POST['video_id'])) {
-            echo json_encode($res);
+        $id = Request::getVar('id',null);
+        $model = Video::getInstance();
+        if ($res = $model->setView($id)) {
+            $str_out = "var vsvcdpd = $res; $('.entry-viewed span').text(vsvcdpd) ";
+            echo $str_out;
         } else {
             echo json_encode(FALSE);
         }
     }
-
-    public function actionCheckSession() {
-        $media = Media::getInstance();
-        $session = Yii::app()->session->get('user_data');
-        if (!isset($session) && $session) {
-            echo json_encode(FALSE);
-        } else {
-
-            $data = array(
-                'uid' => $session['id'],
-                'fid' => $_POST['id']
-            );
-            //Set like
-            if (!$media->addUserLike($data)) {
-                echo json_encode(TRUE);
-            }
+    
+    function actionLikevideo(){
+        $id = Request::getVar('id',null);
+        $model = Video::getInstance();
+        
+        $like_videos = Yii::app()->session['like-video'];
+        
+        if($like_videos == null) $like_videos = array();
+        if(isset($like_videos[$id])){
+            $res = $model->get_readview($id);
+        }else{
+            $model = Video::getInstance();
+            $res = $model->setLike($id);
         }
+        
+        $like_videos[$id] = $id;
+        Yii::app()->session['like-video'] = $like_videos;        
+        $str_out = "var vlvcdpd = $res; $('.entry-info .fa-thumbs-o-up').css('color','black') ";
+        echo $str_out;
+        die;
     }
-
 }

@@ -732,3 +732,5 @@ body.users {
     text-align: justify;
     line-height: 22px;
 }
+
+.video-player{ width: 100%; height: 315px; }

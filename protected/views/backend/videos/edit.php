@@ -1,7 +1,7 @@
 <div class="module row">
     <form action="<?php echo $this->createUrl('videos/') ?>" method="post" name="adminForm">
         <input type="hidden" name="id" value="<?php echo $item->id ?>"/>
-        <input type="hidden" name="linkyoutube" class="form-control title-generate" value="<?php echo $item->linkyoutube; ?>">
+        <input type="hidden" name="linkyoutube" class="form-control" value="<?php echo $item->linkyoutube; ?>">
         <div class="col-md-8">
             <div class="panel">
                 <div class="panel-heading">
@@ -53,13 +53,15 @@
                         <div class="col-md-3">Video code</div>
                         <div class="col-md-9">
                             <textarea name="videocode" rows="3" class="form-control"><?php echo $item->videocode; ?></textarea>
+                            Mã nhúng video &lt;object>, &lt;embed> hoặc &lt;iframe>.
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <div class="col-md-3">Video url</div>
                         <div class="col-md-9">
-                            <input name="videourl" type="text" value="<?php echo $item->videourl; ?>" class="form-control" />
+                            <input name="videourl" type="text" value="<?php echo $item->videourl; ?>" class="form-control" placeholder="Link to file video" />
+                            Link trực tiếp đến video
                              <a href="javascript:void(0)" class="label label-primary" role="button" onclick="BrowseServerVideo();">Add video</a>
                         </div>
                     </div>
@@ -79,7 +81,7 @@
                             <select class="form-control" name="category">
                                 <?php if (isset($categories) && $categories): ?>
                                     <?php foreach ($categories as $category): ?>
-                                        <option value="<?php echo $category['id'] ?>" <?php echo isset($item['category_id']) && ($item['category_id'] == $category['id']) ? 'selected' : '' ?>><?php echo $category['title'] ?></option>
+                                        <option value="<?php echo $category['id'] ?>" <?php echo isset($item['catID']) && ($item['catID'] == $category['id']) ? 'selected' : '' ?>><?php echo $category['title'] ?></option>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </select>

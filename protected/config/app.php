@@ -25,8 +25,11 @@ $settings = array(
                 'tin-tuc/<alias:[\d\w-]+>/trang-<page:[0-9]+>' => array('news/category'),
                 'tin-tuc/<id:[0-9]+>-<alias:.*>' => array('news/detail','urlSuffix'=>'.html'),
                           
-                '<alias:[\d\w-]+>' => array('videos/category'), 
-                'video/<id:[\d\w-]+>' => array('videos/detail'), 
+                '<alias:[\d\w-]+>' => array('videos/category','urlSuffix'=>'/'), 
+                'video/<id:[0-9]+>-<alias:[\d\w-]+>' => array('videos/detail','urlSuffix'=>'.html'), 
+                'video/<alias:[\d\w-]+>' => array('videos/detail'),                
+                'video/viewed/<id:.+>.js' => array('videos/setview'),
+                'video/likevideo/<id:.+>.js' => array('videos/likevideo'),
             ),
         ),
         
