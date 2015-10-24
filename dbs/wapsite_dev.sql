@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2015 at 10:58 AM
+-- Generation Time: Oct 24, 2015 at 06:57 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -95,12 +95,12 @@ CREATE TABLE IF NOT EXISTS `tbl_categories` (
 --
 
 INSERT INTO `tbl_categories` (`id`, `title`, `alias`, `scope`, `cdate`, `mdate`, `ordering`, `lft`, `rgt`, `type`, `description`, `metakey`, `metadesc`, `showpath`, `status`, `feature`, `link_original`, `redirect`) VALUES
-(31, 'Tin tức-Làm đẹp', 'tin-tuc-lam-dep', '', '2015-08-26 08:14:25', '2015-10-21 21:15:15', 0, 0, 0, 0, 'Tin tức-Làm đẹp', 'Tin tức-Làm đẹp', 'Tin tức-Làm đẹp', 0, 1, 1, '', 0),
-(30, 'Tin tức-Sao việt', 'tin-tuc-sao-viet', '', '2015-08-26 08:14:12', '2015-10-21 21:15:30', 0, 0, 0, 0, 'Tin tức-Sao việt', 'Tin tức-Sao việt', 'Tin tức-Sao việt', 0, 1, 1, '', 0),
-(29, 'Vui nhộn', 'vui-nhon', '', '2015-08-25 03:54:49', '2015-08-25 03:54:49', 0, 0, 0, 1, 'Vui nhộn', 'Vui nhộn', 'Vui nhộn', 0, 1, 0, '', 0),
-(28, 'Phim Con Heo', 'phim-con-heo', '', '2015-08-25 03:54:21', '2015-08-25 03:54:21', 0, 0, 0, 1, 'Phim con heo', 'Phim con heo', 'Phim con heo', 0, 1, 0, '', 0),
-(27, 'Hài Hước', 'hai-huoc', '', '2015-08-25 03:51:41', '2015-08-25 03:51:41', 0, 0, 0, 1, 'ádasd', 'ádas', 'ádasdas', 0, 1, 0, '', 0),
-(32, 'Thể Thao', 'the-thao', '', '2015-08-27 11:16:04', '2015-10-21 21:15:40', 0, 0, 0, 1, 'thể thao', '', '', 0, 1, 1, '', 0);
+(31, 'Tin tức-Làm đẹp', 'tin-tuc-lam-dep', 'videos', '2015-08-26 08:14:25', '2015-10-21 21:15:15', 0, 0, 0, 0, 'Tin tức-Làm đẹp', 'Tin tức-Làm đẹp', 'Tin tức-Làm đẹp', 0, 1, 1, '', 0),
+(30, 'Tin tức-Sao việt', 'tin-tuc-sao-viet', 'articles', '2015-08-26 08:14:12', '2015-10-21 21:15:30', 0, 0, 0, 0, 'Tin tức-Sao việt', 'Tin tức-Sao việt', 'Tin tức-Sao việt', 0, 1, 1, '', 0),
+(29, 'Vui nhộn', 'vui-nhon', 'videos', '2015-08-25 03:54:49', '2015-08-25 03:54:49', 0, 0, 0, 1, 'Vui nhộn', 'Vui nhộn', 'Vui nhộn', 0, 1, 0, '', 0),
+(28, 'Phim Con Heo', 'phim-con-heo', 'videos', '2015-08-25 03:54:21', '2015-08-25 03:54:21', 0, 0, 0, 1, 'Phim con heo', 'Phim con heo', 'Phim con heo', 0, 1, 0, '', 0),
+(27, 'Hài Hước', 'hai-huoc', 'videos', '2015-08-25 03:51:41', '2015-08-25 03:51:41', 0, 0, 0, 1, 'ádasd', 'ádas', 'ádasdas', 0, 1, 0, '', 0),
+(32, 'Thể Thao', 'the-thao', 'videos', '2015-08-27 11:16:04', '2015-10-21 21:15:40', 0, 0, 0, 1, 'thể thao', '', '', 0, 1, 1, '', 0);
 
 -- --------------------------------------------------------
 
@@ -215,11 +215,12 @@ INSERT INTO `tbl_like` (`like_id`, `uid`, `fid`, `value`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_users` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(128) NOT NULL,
-  `groupID` bigint(20) NOT NULL,
+  `groupID` tinyint(4) NOT NULL,
+  `leader` smallint(6) NOT NULL,
   `mobile` varchar(50) NOT NULL,
   `home_phone` varchar(50) NOT NULL,
   `first_name` varchar(50) NOT NULL,
@@ -230,40 +231,29 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   `zip_code` varchar(30) NOT NULL,
   `country` smallint(6) NOT NULL,
   `suppliers` varchar(32) NOT NULL,
-  `cdate` int(11) NOT NULL,
-  `mdate` int(11) NOT NULL,
+  `cdate` datetime NOT NULL,
+  `mdate` datetime NOT NULL,
   `template_id` smallint(6) NOT NULL,
   `status` smallint(6) NOT NULL,
   `lastvisit` datetime NOT NULL,
   `activeCode` varchar(64) NOT NULL,
   `params` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `groupID` (`groupID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=36 ;
+  UNIQUE KEY `username` (`username`),
+  KEY `address` (`address`),
+  KEY `city` (`city`),
+  KEY `province_state` (`province_state`),
+  KEY `status` (`status`),
+  KEY `template_id` (`template_id`),
+  KEY `email` (`email`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=29 ;
 
 --
 -- Dumping data for table `tbl_users`
 --
 
-INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `groupID`, `mobile`, `home_phone`, `first_name`, `last_name`, `address`, `city`, `province_state`, `zip_code`, `country`, `suppliers`, `cdate`, `mdate`, `template_id`, `status`, `lastvisit`, `activeCode`, `params`) VALUES
-(28, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@gmail.com', 25, '', '', 'admin', 'admin', '', '', '', '', 0, '', 0, 2014, 0, 1, '2015-10-22 15:51:57', '', ''),
-(20, 'anhvinhvs', 'e10adc3949ba59abbe56e057f20f883e', 'ducdm87@gmail.com', 19, '', '', 'ducdm87', '', '', '', '', '', 0, 'facebook', 1392186072, 2015, 0, 2, '2014-02-12 14:34:00', '', ''),
-(7, 'ducdm@binhhoang.com', '25f9e794323b453885f5181f1b624d0b', 'ducdm@binhhoang.com', 19, '', '', 'ducdm', '', '', '', '', '', 0, '', 1389770555, 2014, 0, 1, '2014-01-16 10:04:50', '2ed194a21f0735a76ee4358192533784:1389840767', ''),
-(8, 'dinhbang19@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'dinhbang19@gmail.com', 19, '', '', 'dinhbang19', '', '', '', '', '', 0, '', 1389841867, 2015, 0, 1, '2014-01-16 10:15:45', '17bb5d16f6e732bfddcc11d63a584a6a:1389841867', ''),
-(12, 'ducdm87@twitter.com', '', 'ducdm87@twitter.com', 19, '', '', 'ducdm87', '', '', '', '', '', 0, 'twitter', 1389856370, 1389856370, 0, 1, '0000-00-00 00:00:00', '', ''),
-(16, 'bangtdadmin', '96e6fc55ef27cd6ee161ba7a062c3111', 'bangtdadmin@gmail.com', 24, '', '', 'bangtdadmin', 'bangtdadmin', '', '', '', '', 0, '', 0, 2014, 0, 1, '2014-02-17 14:24:04', '', ''),
-(14, 'bangtd@binhhoang.com', 'e10adc3949ba59abbe56e057f20f883e', 'bangtd@binhhoang.com', 19, '', '', 'bangtd', '', '', '', '', '', 0, '', 1390532686, 1390532686, 0, 1, '2014-01-24 10:14:08', '0ccf5da3b41dff684ee030f1b6f9894e:1390532686', ''),
-(15, 'hoangdaoxuan@yahoo.com.au', '', 'hoangdaoxuan@yahoo.com.au', 19, '', '', 'hoangdaoxuan', '', '', '', '', '', 0, 'facebook', 1390536708, 1390536708, 0, 1, '0000-00-00 00:00:00', '', ''),
-(17, 'vuhien', 'c0f849c33cf98290c9bd976fb81eb6b0', 'vuhien@binhhoang.com', 23, '', '', 'vuhien', 'vuhien', '', '', '', '', 0, '', 0, 2014, 0, 1, '2014-02-10 13:53:28', '', ''),
-(18, 'anhmantk@gmail.com', '', 'anhmantk@gmail.com', 19, '', '', 'anhmantk', '', '', '', '', '', 0, 'facebook', 1392112877, 1392112877, 0, 1, '0000-00-00 00:00:00', '', ''),
-(19, 'ducdm871@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'ducdm871@gmail.com', 19, '', '', 'ducdm871', '', '', '', '', '', 0, '', 1392177110, 1392177110, 0, 1, '2014-02-12 13:14:56', '18f48748011eb544d6bbf7062d6042da:1392177110', ''),
-(29, 'adminsadsas', 'e10adc3949ba59abbe56e057f20f883e', '', 19, '04 8738 2173', '', 'Dương', 'Vinh', '', '', '', '', 0, '', 0, 0, 0, 1, '0000-00-00 00:00:00', '', ''),
-(30, 'adminsadsas', 'e10adc3949ba59abbe56e057f20f883e', '', 19, '04 8738 2173', '', 'Dương', 'Vinh', '', '', '', '', 0, '', 0, 0, 0, 1, '0000-00-00 00:00:00', '', ''),
-(31, 'adminsadsas', 'e10adc3949ba59abbe56e057f20f883e', '', 19, '04 8738 2173', '', 'Dương', 'Vinh', '', '', '', '', 0, '', 0, 0, 0, 1, '0000-00-00 00:00:00', '', ''),
-(32, 'adminsadsas', 'e10adc3949ba59abbe56e057f20f883e', '', 19, '04 8738 2173', '', 'Dương', 'Vinh', '', '', '', '', 0, '', 0, 0, 0, 1, '0000-00-00 00:00:00', '', ''),
-(33, 'adminsadsas', 'e10adc3949ba59abbe56e057f20f883e', '', 19, '04 8738 2173', '', 'Dương', 'Vinh', '', '', '', '', 0, '', 0, 0, 0, 1, '0000-00-00 00:00:00', '', ''),
-(34, 'adminsadsas', 'e10adc3949ba59abbe56e057f20f883e', '', 19, '04 8738 2173', '', 'Dương', 'Vinh', '', '', '', '', 0, '', 0, 0, 0, 1, '0000-00-00 00:00:00', '', ''),
-(35, 'cuongph', 'e10adc3949ba59abbe56e057f20f883e', '', 19, '0985922500', '', 'Phạm', 'Cường', '', '', '', '', 0, '', 0, 0, 0, 1, '0000-00-00 00:00:00', '', '');
+INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `groupID`, `leader`, `mobile`, `home_phone`, `first_name`, `last_name`, `address`, `city`, `province_state`, `zip_code`, `country`, `suppliers`, `cdate`, `mdate`, `template_id`, `status`, `lastvisit`, `activeCode`, `params`) VALUES
+(28, 'admin', '0192023a7bbd73250516f069df18b500', 'admin@gmail.com', 2, 0, '', '', 'admin', 'admin', '', '', '', '', 0, '', '2015-10-24 00:00:00', '2015-10-24 00:00:00', 0, 1, '2015-10-24 11:56:21', '', '');
 
 -- --------------------------------------------------------
 
@@ -272,30 +262,36 @@ INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `groupID`, `mobi
 --
 
 CREATE TABLE IF NOT EXISTS `tbl_users_group` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parentID` int(11) NOT NULL DEFAULT '0',
   `name` varchar(255) NOT NULL DEFAULT '',
   `lft` int(11) NOT NULL DEFAULT '0',
+  `rgt` smallint(6) NOT NULL,
+  `level` tinyint(4) NOT NULL,
   `value` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
+  `isActive` varchar(1) NOT NULL,
+  `backend` tinyint(4) NOT NULL,
+  `status` smallint(6) NOT NULL,
+  `cdate` datetime NOT NULL,
+  `mdate` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `matdep_gacl_parent_id_aro_groups` (`parentID`),
+  KEY `matdep_gacl_lft_rgt_aro_groups` (`lft`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
 
 --
 -- Dumping data for table `tbl_users_group`
 --
 
-INSERT INTO `tbl_users_group` (`id`, `parent_id`, `name`, `lft`, `value`) VALUES
-(17, 0, 'ROOT', 1, 'ROOT'),
-(28, 17, 'USERS', 2, 'USERS'),
-(29, 28, 'Public Frontend', 3, 'Public Frontend'),
-(18, 29, 'Registered', 4, 'Registered'),
-(19, 18, 'Author', 5, 'Author'),
-(20, 19, 'Editor', 6, 'Editor'),
-(21, 20, 'Publisher', 7, 'Publisher'),
-(30, 28, 'Public Backend', 13, 'Public Backend'),
-(23, 30, 'Manager', 14, 'Manager'),
-(24, 23, 'Administrator', 15, 'Administrator'),
-(25, 24, 'Super Administrator', 16, 'Super Administrator');
+INSERT INTO `tbl_users_group` (`id`, `parentID`, `name`, `lft`, `rgt`, `level`, `value`, `isActive`, `backend`, `status`, `cdate`, `mdate`) VALUES
+(1, 0, 'ROOT', 1, 22, 0, 'ROOT', '', -1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 1, 'Registered', 20, 21, 1, 'Registered', '', 0, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(7, 6, 'Author', 12, 13, 3, 'Author', '', 0, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(6, 5, 'Editor', 11, 16, 2, 'Editor', '', 0, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, 1, 'Publisher', 10, 19, 1, 'Publisher', '', 0, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 1, 'Super Administrator', 2, 9, 1, 'Super Administrator', '', 1, 1, '0000-00-00 00:00:00', '2015-10-19 10:19:24'),
+(31, 2, 'quản lý khu vực 1', 7, 8, 2, 'quản lý khu vực 1', '1', 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(32, 2, 'quản lý khu vực 2', 5, 6, 2, 'quản lý khu vực 2', '1', 1, 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
