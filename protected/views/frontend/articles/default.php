@@ -19,7 +19,7 @@
                 <div class="container-fluid">
                     <?php if (isset($category['posts']) && $category['posts']): ?>
                         <?php foreach ($category['posts'] as $post): 
-                            $link_content = $this->createUrl('news/detail/',array('id'=>$post['id'],'alias'=> $post['alias']) );
+                            $link_content = $this->createUrl('articles/detail/',array('id'=>$post['id'],'alias'=> $post['alias']) );
                             ?>
                             <div class="media entry-news">
                                 <div class="media-left media-middle">

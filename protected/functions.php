@@ -65,7 +65,7 @@ function getListObjectID($type = "news", $format = "string", $sperator = ",") {
 }
 
 function fnCreateUrlNewsDetail($cid, $alias, $catid, $cat_alias) {
-    return Yii::app()->createUrl("news/detail", array("cid" => $cid, "alias" => $alias, "cat_alias" => $cat_alias));
+    return Yii::app()->createUrl("articles/detail", array("id" => $cid, "alias" => $alias));
 }
 
 function fnShowPagenation($link, $total, $limit, $currentPage) {
@@ -442,38 +442,7 @@ function fnShowTienIch() {
     </div>
     <?php
 }
-
-function biudGroupHtml($data) {
-    if ($data) {
-        ?>
-        <div class="panel role_group">
-            <?php
-            foreach ($data as $key => $group) {
-                if ($group['parent_id'] == 0) {
-                    subGroup($data, $group['id']);
-                }
-            }
-            ?>
-        </div>
-        <?php
-    }
-}
-
-function subGroup($items, $id) {
-    echo '<ul>';
-    foreach ($items as $item) {
-        if ($item['parent_id'] == $id) {
-            echo '<li><div class="alert alert-warning alert-dismissible" role="alert"><strong>' . $item['name'] . '</strong>';
-            if ($item['isActive'] != 0) {
-                echo '<a href="?id=' . $item['id'] . '" class="close" ><span aria-hidden="false">&#10000;</span></a>&nbsp;<a href="?delete=' . $item['id'] . '" class="close" ><span aria-hidden="false">&times;</span></a>';
-            }
-            echo '</div>';
-            subGroup($items, $item['id']);
-            echo '</li>';
-        }
-    }
-    echo '</ul>';
-}
+ 
 
 function fnDisplayVideo($item){
     $pl_id = "player-".$item['id'];   

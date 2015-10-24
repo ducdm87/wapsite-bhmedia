@@ -95,7 +95,7 @@
                     <nav class="navbar navbar-static-top">
                         <ul class="nav navbar-nav">
                             <li class="active"><a href="<?php echo $this->createUrl('app/') ?>" class="active">Home</a></li>
-                            <li><a href="<?php echo $this->createUrl('news/') ?>" class="hidden-xs hidden-sm">Tin Tức</a></li>
+                            <li><a href="<?php echo $this->createUrl('articles/') ?>" class="hidden-xs hidden-sm">Tin Tức</a></li>
                             <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "the-thao") ); ?>" class="hidden-xs hidden-sm">Thể Thao</a></li>
                             <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "hai") ); ?>" class="hidden-xs hidden-sm">Hài</a></li>
                             <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "dien-anh") ); ?>" class="hidden-xs hidden-sm">Điện Ảnh</a></li>                            

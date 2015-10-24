@@ -28,6 +28,7 @@ class Category extends CFormModel {
         return $instance;
     }
 
+    // danh sách chuyên mục nổi bật
     public function getItems($feature = true, $condition = "", $limit = 5, $start = 0) {        
         $conds = array();
         if($condition != "")

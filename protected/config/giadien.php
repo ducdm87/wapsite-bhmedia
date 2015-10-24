@@ -26,32 +26,32 @@ $settings = array(
             'urlFormat' => 'path',
             'rules' => array(
                 // home page
-                '' => array('news/detail','urlSuffix'=>'.html','defaultParams'=>array("alias"=>"bieu-gia-ban-dien","showpath"=>0)),
-                'cach-tinh-gia-dien/' => array('news/detail','urlSuffix'=>'.html','defaultParams'=>array("alias"=>"cach-tinh-gia-dien","showpath"=>0)),
+                '' => array('articles/detail','urlSuffix'=>'.html','defaultParams'=>array("alias"=>"bieu-gia-ban-dien","showpath"=>0)),
+                'cach-tinh-gia-dien/' => array('articles/detail','urlSuffix'=>'.html','defaultParams'=>array("alias"=>"cach-tinh-gia-dien","showpath"=>0)),
                 
                 'lich-cat-dien/<location_alias:[\w-\d]+>/ngay-<date:\d{1,2}-\d{1,2}-\d\d\d\d>' => array('giadien/lichcatdien','urlSuffix'=>'.html'),
                 'lich-cat-dien/<location_alias:[\w-\d]+>' => array('giadien/lichcatdien','urlSuffix'=>'.html'),
                 'lich-cat-dien/' => array('giadien/lichcatdien'),
                 
-                'tiet-kiem-dien/' => array('news/category','defaultParams'=>array("alias"=>"tiet-kiem-dien" )),
-                'tiet-kiem-dien/trang-<page:[0-9]+>' => array('news/category','defaultParams'=>array("alias"=>"tiet-kiem-dien" )),
-                'tiet-kiem-dien/<cid:[0-9]+>-<alias:.*>' => array('news/detail','urlSuffix'=>'.html','defaultParams'=>array("alias"=>"tiet-kiem-dien")),
+                'tiet-kiem-dien/' => array('articles/category','defaultParams'=>array("alias"=>"tiet-kiem-dien" )),
+                'tiet-kiem-dien/trang-<page:[0-9]+>' => array('articles/category','defaultParams'=>array("alias"=>"tiet-kiem-dien" )),
+                'tiet-kiem-dien/<cid:[0-9]+>-<alias:.*>' => array('articles/detail','urlSuffix'=>'.html','defaultParams'=>array("alias"=>"tiet-kiem-dien")),
                 
-                'xu-ly-vi-pham/' => array('news/category','defaultParams'=>array("alias"=>"xu-ly-vi-pham")),
-                'xu-ly-vi-pham/trang-<page:[0-9]+>' => array('news/category','defaultParams'=>array("alias"=>"xu-ly-vi-pham")),
-                'xu-ly-vi-pham/<cid:[0-9]+>-<alias:.*>' => array('news/detail','urlSuffix'=>'.html','defaultParams'=>array("cat_alias"=>"xu-ly-vi-pham")),
+                'xu-ly-vi-pham/' => array('articles/category','defaultParams'=>array("alias"=>"xu-ly-vi-pham")),
+                'xu-ly-vi-pham/trang-<page:[0-9]+>' => array('articles/category','defaultParams'=>array("alias"=>"xu-ly-vi-pham")),
+                'xu-ly-vi-pham/<cid:[0-9]+>-<alias:.*>' => array('articles/detail','urlSuffix'=>'.html','defaultParams'=>array("cat_alias"=>"xu-ly-vi-pham")),
                 
                 'hoi-dap/' => array('giadien/hoidap'),
                 'hoi-dap/trang-<page:[0-9]+>' => array('giadien/hoidap'),
                 'hoi-dap/<cid:[0-9]+>-<alias:.*>' => array('giadien/hoidapdetail','urlSuffix'=>'.html','defaultParams'=>array("ItemID"=>8)),
                 
                 
-                'thu-tuc-cap-dien/' => array('news/detail',".html",'defaultParams'=>array("alias"=>"thu-tuc-cap-dien"  )), 
+                'thu-tuc-cap-dien/' => array('articles/detail',".html",'defaultParams'=>array("alias"=>"thu-tuc-cap-dien"  )), 
                 
-                'tin-tuc/' => array('news/display'),
-                'tin-tuc/<alias:[\d\w-]+>' => array('news/category'),
-                'tin-tuc/<alias:[\d\w-]+>/trang-<page:[0-9]+>' => array('news/category'),
-                'tin-tuc/<cat_alias:[\d\w-]+>/<cid:[0-9]+>-<alias:.*>' => array('news/detail','urlSuffix'=>'.html'),
+                'tin-tuc/' => array('articles/display'),
+                'tin-tuc/<alias:[\d\w-]+>' => array('articles/category'),
+                'tin-tuc/<alias:[\d\w-]+>/trang-<page:[0-9]+>' => array('articles/category'),
+                'tin-tuc/<cat_alias:[\d\w-]+>/<cid:[0-9]+>-<alias:.*>' => array('articles/detail','urlSuffix'=>'.html'),
             ),
         ),
         'user' => array(

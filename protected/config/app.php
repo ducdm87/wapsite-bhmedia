@@ -20,10 +20,10 @@ $settings = array(
                 '/' => array('app/display'),
                 '' => array('app/'),                             
 
-                'tin-tuc' => array('news/'),                 
-                'tin-tuc/<alias:[\d\w-]+>' => array('news/category'),
-                'tin-tuc/<alias:[\d\w-]+>/trang-<page:[0-9]+>' => array('news/category'),
-                'tin-tuc/<id:[0-9]+>-<alias:.*>' => array('news/detail','urlSuffix'=>'.html'),
+                'tin-tuc' => array('articles/'),                 
+                'tin-tuc/<alias:[\d\w-]+>' => array('articles/category'),
+                'tin-tuc/<alias:[\d\w-]+>/trang-<page:[0-9]+>' => array('articles/category'),
+                'tin-tuc/<id:[0-9]+>-<alias:.*>' => array('articles/detail','urlSuffix'=>'.html'),
                           
                 '<alias:[\d\w-]+>' => array('videos/category','urlSuffix'=>'/'), 
                 'video/<id:[0-9]+>-<alias:[\d\w-]+>' => array('videos/detail','urlSuffix'=>'.html'), 

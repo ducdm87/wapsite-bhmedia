@@ -6,23 +6,7 @@
  * and open the template in the editor.
  */
 
-define("ENABLE_MULTISITE", 1);
-/*
- * Define Category Type
- */
-define('NEWS_TYPE', 0);
-define('VIDEO_TYPE', 1);
-define('IMAGE_TYPE', 2);
-define('VIDEO_SPORT', 3);
-/*
- * 
- * Define Film Type
- */
-define('FILM', 1);
-define('CLIP', 2);
-define('HAI', 3);
-define('AM_NHAC', 4);
-
+define("ENABLE_MULTISITE", 1); 
 
 $domain = "vietbao.vn"; 
 

@@ -1,10 +1,9 @@
 <?php
 
-class News {
+class Article {
 
-    var $tablename = "{{news_content}}";
-    var $tbl_category = "{{categories}}";
-    var $tbl_contentauto = "{{news_content_auto}}";
+    var $tablename = "{{articles}}";
+    var $tbl_category = "{{categories}}";   
     var $str_error = "";
     var $str_return = "";
     var $return_data = "";
@@ -17,29 +16,19 @@ class News {
         static $instance;
 
         if (!is_object($instance)) {
-            $instance = new News();
+            $instance = new Article();
         }
         return $instance;
     }
     
-    function getLastNews($scope = "article", $limit = 6)
+    function getLastNews($limit = 10)
     {
         global $mainframe, $db;
         
-        $where = " ";
-        if($scope != "*"){
-            $where .= " AND B.`scope` = '$scope' AND B.`alias` != 'uncategorised' ";
-        }
-		$list_idnews = getListObjectID("news");
-		if($list_idnews != false and $list_idnews != ""){
-			$where .= " id in($list_idnews) ";
-		}
-		
         $query = "SELECT A.*, B.alias cat_alias, B.title cat_title "
                     ."FROM " . $this->tablename 
-                             . " A LEFT JOIN ". $this->tbl_category . " B ON A.catid = B.id "
+                             . " A LEFT JOIN ". $this->tbl_category . " B ON A.catID = B.id "
                     ." WHERE A.status = 1 AND B.status = 1 "
-                        . $where
                    ." ORDER BY A.created DESC, A.ordering DESC LIMIT $limit";
         $query_command = $db->createCommand($query);
         $items = $query_command->queryAll();
@@ -73,7 +62,7 @@ class News {
         $arr_new = array();
          for($i=0;$i<count($items);$i++){
              $item = $items[$i];
-             $item['link'] = Yii::app()->createUrl("news/category",array("alias"=>$item['alias']));
+             $item['link'] = Yii::app()->createUrl("articles/category",array("alias"=>$item['alias']));
              $item['contents'] = $this->getNewsCategoy($item['id'],0, $limit);
              $arr_new[$item['id']] = $item;
          }
@@ -132,7 +121,7 @@ class News {
                         ." AND alias = '$alias' LIMIT 1";
         $query_command = $db->createCommand($query);
         $item = $query_command->queryRow();
-        $item['link'] = Yii::app()->createUrl("news/category",array("alias"=>$item['alias']));
+        $item['link'] = Yii::app()->createUrl("articles/category",array("alias"=>$item['alias']));
         
         
         $query = "SELECT count(*) FROM " . $this->tablename 
@@ -164,8 +153,8 @@ class News {
         $item = $query_command->queryRow();
         if($item == FALSE) return false;
         $item['slug'] = $item['id']."-".$item['alias'];
-         $item['cat_link'] = Yii::app()->createUrl("news/category",array("alias"=>$item['cat_alias']));
-        $item['link'] = Yii::app()->createUrl("news/detail",array("cid"=>$item['id'],"alias"=>$item['alias'], "cat"=>$item['cat_alias']));
+         $item['cat_link'] = Yii::app()->createUrl("articles/category",array("alias"=>$item['cat_alias']));
+        $item['link'] = Yii::app()->createUrl("articles/detail",array("cid"=>$item['id'],"alias"=>$item['alias'], "cat"=>$item['cat_alias']));
         addObjectID($item['id'], "news");
         return $item;
     }

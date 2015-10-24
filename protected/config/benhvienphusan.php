@@ -22,10 +22,10 @@ $settings = array(
                 'ban-do-cay-xang/<location_alias:[\w-\d]+>' => array('giaxang/maps','urlSuffix'=>'.html','defaultParams'=>array("task"=>"giaxang")),
                 'ban-do-cay-xang/' => array('giaxang/maps','defaultParams'=>array("task"=>"giaxang")),
                
-                'tin-tuc/' => array('news/display'),
-                'tin-tuc/<alias:[\d\w-]+>' => array('news/category'),
-                'tin-tuc/<alias:[\d\w-]+>/trang-<page:[0-9]+>' => array('news/category'),
-                'tin-tuc/<cat_alias:[\d\w-]+>/<cid:[0-9]+>-<alias:.*>' => array('news/detail','urlSuffix'=>'.html'),
+                'tin-tuc/' => array('articles/display'),
+                'tin-tuc/<alias:[\d\w-]+>' => array('articles/category'),
+                'tin-tuc/<alias:[\d\w-]+>/trang-<page:[0-9]+>' => array('articles/category'),
+                'tin-tuc/<cat_alias:[\d\w-]+>/<cid:[0-9]+>-<alias:.*>' => array('articles/detail','urlSuffix'=>'.html'),
             ),
         ),
         
