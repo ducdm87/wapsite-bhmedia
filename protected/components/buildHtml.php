@@ -186,6 +186,32 @@ class buildHtml {
         return $html;
     }
     
+            public static function changState($cid, $value = 0, $prefix = "archive.", $title_prefix = "day", $fldName = 'cb'){
+                
+                $title = 'Toggle to change '.$title_prefix.' to on ';
+                $task = $prefix."on";
+                $img_name = "publish_g.png";
+                if ($value == 0) {
+                    $title = 'Toggle to change '.$title_prefix.' to on ';
+                    $task = $prefix."on";
+                    $img_name = "publish_x.png";
+                } else if ($value == 1) {
+                    $title = 'Toggle to change '.$title_prefix.' to off ';
+                    $task = $prefix."off";
+                    $img_name = "publish_g.png";
+                }
+		ob_start();
+                $fldName = $fldName . "$cid";
+                ?>
+                <span class="editlinktip hasTip"><a onclick="return listItemTask('<?php echo $fldName; ?>', '<?php echo $task; ?>')" href="javascript:void(0);">
+                        <img width="16" height="16" border="0" alt="<?php echo $title; ?>" src="/admin/templates/standard/assets/images/icons/<?php echo $img_name; ?>"></a></span>
+                <?php
+                $return = ob_get_contents();
+                ob_end_clean();
+                return $return;
+        }
+
+    
     static function renderField($type = "text", $name, $value = "", $title, $class = "form-control"){
         
         $html = '<div class="form-group row">';

@@ -51,7 +51,10 @@ function showBlockHome($items, $title = "Video Hot", $url = ""){
                                                         </a>
                                                     </div>
                                                     <div class="media-body">
-                                                        <span class="media-heading"><a href="<?php echo $item['link']; ?>"><?php echo buildHtml::truncateText($item['title'], 40) ?></a></span>
+                                                        <span class="media-heading"><a href="<?php echo $item['link']; ?>"><?php 
+//                                                        echo buildHtml::truncateText($item['title'], 40) ;
+                                                        echo $item['title'];
+                                                                ?></a></span>
                                                         <span class="entry-control">
                                                             <span><i class="fa fa-thumbs-o-up"></i> <?php echo isset($item['value']) ? $item['value'] : 0; ?></span>
                                                             <span><i class="fa fa-play-circle-o"></i> <?php echo isset($item['viewed']) ? $item['viewed'] : 0; ?></span>

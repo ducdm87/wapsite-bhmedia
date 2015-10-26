@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2015 at 06:57 AM
+-- Generation Time: Oct 27, 2015 at 06:39 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `tbl_categories` (
 
 INSERT INTO `tbl_categories` (`id`, `title`, `alias`, `scope`, `cdate`, `mdate`, `ordering`, `lft`, `rgt`, `type`, `description`, `metakey`, `metadesc`, `showpath`, `status`, `feature`, `link_original`, `redirect`) VALUES
 (31, 'Tin tức-Làm đẹp', 'tin-tuc-lam-dep', 'videos', '2015-08-26 08:14:25', '2015-10-21 21:15:15', 0, 0, 0, 0, 'Tin tức-Làm đẹp', 'Tin tức-Làm đẹp', 'Tin tức-Làm đẹp', 0, 1, 1, '', 0),
-(30, 'Tin tức-Sao việt', 'tin-tuc-sao-viet', 'articles', '2015-08-26 08:14:12', '2015-10-21 21:15:30', 0, 0, 0, 0, 'Tin tức-Sao việt', 'Tin tức-Sao việt', 'Tin tức-Sao việt', 0, 1, 1, '', 0),
+(30, 'Tin tức-Sao việt', 'tin-tuc-sao-viet', 'articles', '2015-08-26 08:14:12', '2015-10-24 23:40:37', 0, 0, 0, 0, 'Tin tức-Sao việt', 'Tin tức-Sao việt', 'Tin tức-Sao việt', 0, 1, 1, '', 0),
 (29, 'Vui nhộn', 'vui-nhon', 'videos', '2015-08-25 03:54:49', '2015-08-25 03:54:49', 0, 0, 0, 1, 'Vui nhộn', 'Vui nhộn', 'Vui nhộn', 0, 1, 0, '', 0),
 (28, 'Phim Con Heo', 'phim-con-heo', 'videos', '2015-08-25 03:54:21', '2015-08-25 03:54:21', 0, 0, 0, 1, 'Phim con heo', 'Phim con heo', 'Phim con heo', 0, 1, 0, '', 0),
 (27, 'Hài Hước', 'hai-huoc', 'videos', '2015-08-25 03:51:41', '2015-08-25 03:51:41', 0, 0, 0, 1, 'ádasd', 'ádas', 'ádasdas', 0, 1, 0, '', 0),
@@ -253,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 --
 
 INSERT INTO `tbl_users` (`id`, `username`, `password`, `email`, `groupID`, `leader`, `mobile`, `home_phone`, `first_name`, `last_name`, `address`, `city`, `province_state`, `zip_code`, `country`, `suppliers`, `cdate`, `mdate`, `template_id`, `status`, `lastvisit`, `activeCode`, `params`) VALUES
-(28, 'admin', '0192023a7bbd73250516f069df18b500', 'admin@gmail.com', 2, 0, '', '', 'admin', 'admin', '', '', '', '', 0, '', '2015-10-24 00:00:00', '2015-10-24 00:00:00', 0, 1, '2015-10-24 11:56:21', '', '');
+(28, 'admin', '0192023a7bbd73250516f069df18b500', 'admin@gmail.com', 2, 0, '', '', 'admin', 'admin', '', '', '', '', 0, '', '2015-10-24 00:00:00', '2015-10-24 00:00:00', 0, 1, '2015-10-25 00:51:58', '', '');
 
 -- --------------------------------------------------------
 
