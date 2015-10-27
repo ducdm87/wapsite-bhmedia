@@ -66,10 +66,11 @@ class YiiTables{
             $this->_message = "Something error to load row width value: $id";
             return $this;
         }
+
         if($returnstd == false){
             foreach($item as $field => $field_value){
                 $this->$field = $field_value;
-            }
+            }            
             return $this;
         }else{
             $obj = new stdClass();

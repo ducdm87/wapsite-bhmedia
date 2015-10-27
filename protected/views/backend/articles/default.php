@@ -1,53 +1,58 @@
-<div class="page-header">
-    <h1><span class="text-left-sm">Posts</h1>
-</div>
-<div class="clearfix"></div>
-<div class="module row">
-    <div class="panel panel-primary">
-        <div class="panel panel-heading">
-            <span><i class="fa fa-bars"></i> List media</span>
-        </div>
-        <div class="panel-body">
-            <div class="">
-                <!--<a href="" class="btn btn-primary" data-toggle="modal" data-target="#uploadExtention"><i class="fa fa-cog"></i> Upload</a>-->
-                <a href="<?php echo $this->createUrl('articles/create') ?>" class="btn btn-danger pull-right btn-sm"><i class="fa fa-plus"></i> Create a Media</a>
-            </div>
-            <br/>
-            <div class="table-resposive" style="margin-top: 20px;">
-                <table class="table table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Date Create</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php if (isset($posts) && $posts): ?>
-                            <?php $i = 1; ?>
-                            <?php foreach ($posts as $post): ?>
-                                <tr class="<?php echo ($i % 2) ? 'info' : 'active' ?>">
-                                    <td><?php echo $i; ?></td>
-                                    <td><?php echo $post['title']; ?></td>
-                                    <td><?php echo $post['introtext']; ?></td>
-                                    <td>
-                                        <?php echo date('F j, Y', strtotime($post['created'])); ?>
-                                    </td>
-                                    <td>
-                                        <a href="<?php echo $this->createUrl('/articles/create?id=' . $post['id']) ?>" role="edit"><i class="fa fa-edit"> Sửa</i></a>
-                                        ||
-                                        <a href="<?php echo $this->createUrl('/posts?delete=' . $post['id']) ?>"><i class="fa fa-times"></i> Xóa</a>
-                                    </td>
-                                </tr>
-                                <?php $i++; ?>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </tbody>
-                </table>
-            </div>
+ 
+<form name="adminForm" method="post" action="">   
+    <table class="adminlist" cellpadding="1">
+        <thead> 
+            <tr>
+                <th width="2%" class="title"> #	</th>
+                <th width="3%" class="title"> <input type="checkbox" onclick="checkAll(<?php echo count($items); ?>);" value="" name="toggle"> </th>                
+                <th class="title"> <a>Title</a></th>
+                <th class="title" width="3%"> <a>Status</a></th>
+                <th class="title" width="3%"> <a>Feature</a></th>                
+                <th class="title" width="25%"> <a>Category</a></th>
+                <th class="title" width="15%"> <a>Created</a></th>
+                <th class="title"  width="3%"> <a>ID</a></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $k = 0;
+            foreach ($items as $i => $item) {
+                $link_edit = $this->createUrl('articles/edit?cid=' . $item['id']);   
+                $item['slug'] = $item['id']."-".$item['alias'];
+                $params = urlencode(json_encode( array("id"=>$item['slug']) ));
+                 
+                $link_view = "/goto.php?control=articles&action=detail&params=$params";
+                $link_edit_cat = $this->createUrl('categories/edit?cid=' . $item['catID']);   
+                ?>
+                <tr class="row1">
+                    <td><?php echo ($i + 1); ?></td>
+                    <td><input type="checkbox" onclick="isChecked(this.checked);" value="<?php echo $item['id'] ?>" name="cid[]" id="cb<?php echo ($i); ?>"></td>
+                    <td>
+                        <a href="<?php echo $link_edit; ?>"><?php echo $item['title']; ?></a>  
+                        <a  style="margin: 0px 0px 0px 10px; font-weight: bold; background: #eee; padding: 3px 5px;" 
+                            target="_blank" href="<?php echo $link_view; ?>">Visit</a>
+                    </td>
+                    <td><?php echo buildHtml::status($i, $item['status']); ?></td>
+                    <td><?php echo buildHtml::changState($i, $item['feature'],"feature."); ?></td>
+                    <td>
+                        <a href="<?php echo $link_edit_cat; ?>"><?php echo $item['cat_title']; ?></a>                           
+                    </td>
+                    <td><?php echo $item['cdate'] ?></td>
+                    <td><?php echo $item['id'] ?></td>
+                </tr>
+                <?php $k = 1 - $k;
+            }
+            ?>
+        </tbody>
 
-        </div>
-    </div>
-</div>
+
+    </table>
+    <input type="hidden" value="0" name="boxchecked">
+    <input type="hidden" value="" name="filter_order">
+    <input type="hidden" value="" name="filter_order_Dir">
+    <input type="hidden" value="" name="task" />
+</form>
+
+
+
+

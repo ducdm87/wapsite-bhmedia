@@ -212,21 +212,52 @@ class buildHtml {
         }
 
     
-    static function renderField($type = "text", $name, $value = "", $title, $class = "form-control"){
-        
+    static function renderField($type = "text", $name, $value = "", $title, $class = null, $placeholder = "", $w1 = 2, $w2 = 10, $width="100%", $height="400px"){
+        if($class == null) $class = "form-control";
         $html = '<div class="form-group row">';
-            $html .= '<label class="control-label left col-md-3">'.$title.'</label>';
-                $html .= '<div class="col-md-9">';
+            $html .= '<label class="control-label left col-md-'.$w1.'">'.$title.'</label>';
+                $html .= '<div class="col-md-'.$w2.'">';
                 if($type == "text")
-                    $html .= '<input type="text" name="'.$name.'" class="'.$class.'" value="'.$value.'">';
+                    $html .= '<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" class="'.$class.'" value="'.$value.'">';
                 else if($type == "textarea")
-                    $html .= '<textarea rows="2" name="'.$name.'" class="'.$class.'">'.$value.'</textarea>';
+                    $html .= '<textarea rows="3" style="width: 100%;" name="'.$name.'" class="'.$class.'">'.$value.'</textarea>';
+                else if($type == "editor")
+                    $html .= buildHtml::editors($name, $value, $width, $height);
                 else if($type == "label")
                     $html .= $value;
+                else if($type == "calander")
+                    $html .= '<input placeholder="'.$placeholder.'" type="text" name="'.$name.'" class="'.$class.' datepicker" value="'.$value.'">';
             $html .= '</div>';
         $html .= '</div>';
          
        
         return $html;
+    }
+    
+    static function editors($name, $value, $width="100%", $height="500px"){
+        $base_url = Yii::app()->getBaseUrl(true);
+        
+        require_once(ROOT_PATH.'editors/ckeditor/ckeditor.php');
+        
+        $config = array();
+         $config['toolbar'] = array(
+            array( "name"=> 'document', "items" => array('Source','-', 'Bold', 'Italic', 'Underline', 'Strike',"Subscript","Superscript" ,"RemoveFormat") ),            
+            array( "name"=> 'clipboard', "items" => array('Cut',"Copy",'Paste', 'PasteText','PasteFromWord','-','Undo','Redo') ),
+            array( "name"=> 'editing', "items" => array("Find", "Replace", "SelectAll","Scayt") ),
+            array( "name"=> 'paragraph', "items" => array('NumberedList', 'BulletedList', 'Outdent', 'Indent',"Blockquote","CreateDiv","JustifyLeft","JustifyCenter","JustifyRight","JustifyBlock") ),
+            array( "name"=> 'insert', "items" => array('Image', 'Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe') ),
+            array( "name"=> 'links', "items" => array('Link', 'Unlink', 'Anchor') ),             
+            array( "name"=> 'styles', "items" => array('Styles', 'Format','Font','FontSize', '-', 'TextColor','BGColor') ),
+            array( "name"=> 'tools', "items" => array('Maximize', '-', 'About') ),
+	);
+         
+         $config['height'] = $height;
+         $config['returnOutput'] = true;
+	 //$events['instanceReady'] = 'function (ev) { }';
+	$CKEditor = new CKEditor("$base_url/editors/ckeditor/");   
+        $CKEditor->returnOutput = true;
+        $out = $CKEditor->editor($name, $value, $config, $events = null); 
+         
+        return $out;        
     }
 }

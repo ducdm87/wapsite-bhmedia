@@ -19,7 +19,7 @@ class YiiCategory{
         $this->_db = $db;        
         if($this->_db == null) $this->_db = Yii::app()->db;
         
-         $this->table = TBL_MODULES;
+         $this->table = TBL_CATEGORIES;
     }
     
     static function & getInstance() {

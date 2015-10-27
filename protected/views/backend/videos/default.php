@@ -5,8 +5,8 @@
             <tr>
                 <th width="2%" class="title"> #	</th>
                 <th width="3%" class="title"> <input type="checkbox" onclick="checkAll(<?php echo count($items); ?>);" value="" name="toggle"> </th>
-                <th class="title" width="3%"> <a>Status</a></th>
                 <th class="title"> <a>Name</a></th>
+                <th class="title" width="3%"> <a>Status</a></th>
                 <th class="title" width="3%"> <a>Feature</a></th>
                 <th class="title" width="15%"> <a>Created</a></th>
                 <th class="title"  width="3%"> <a>ID</a></th>
@@ -25,12 +25,12 @@
                 <tr class="row1">
                     <td><?php echo ($i + 1); ?></td>
                     <td><input type="checkbox" onclick="isChecked(this.checked);" value="<?php echo $item['id'] ?>" name="cid[]" id="cb<?php echo ($i); ?>"></td>
-                    <td><?php echo buildHtml::status($i, $item['status']); ?></td>
                     <td>
                         <a href="<?php echo $link_edit; ?>"><?php echo $item['title']; ?></a>  
                         <a  style="margin: 0px 0px 0px 10px; font-weight: bold; background: #eee; padding: 3px 5px;" 
                             target="_blank" href="<?php echo $link_view; ?>">Visit</a>
                     </td>
+                    <td><?php echo buildHtml::status($i, $item['status']); ?></td>
                     <td><?php echo buildHtml::changState($i, $item['feature'],"feature."); ?></td>
                     <td><?php echo $item['cdate'] ?></td>
                     <td><?php echo $item['id'] ?></td>

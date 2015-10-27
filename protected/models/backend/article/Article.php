@@ -28,6 +28,40 @@ class Article extends CFormModel {
         }
         return $instance;
     }
+    
+    function getItems($limit = 10, $start = 0, $where = array()){
+        $obj_table = YiiArticle::getInstance();
+        $items = $obj_table->getItems(null, $conditions = "", $orderBy ="A.id desc", $limit, $start);
+        return $items;
+    }
+    
+    public function getItem($cid){
+        $obj_table = YiiArticle::getInstance();
+        $result = $obj_table->loadItem($cid);        
+        return $result;
+    }
+    
+    public function getListEdit($mainItem)
+    {
+        $list = array();
+
+        $obj_module = YiiCategory::getInstance();
+        $items = $obj_module->loadItems('id value, title text');
+        $list['category'] = buildHtml::select($items, $mainItem->catID, "catID","","size=7");
+         
+        $items = array();
+        $items[] = array("value"=>0, "text"=>"Unpublish");
+        $items[] = array("value"=>1, "text"=>"Publish");
+        $items[] = array("value"=>-1, "text"=>"Hidden");
+        $list['status'] = buildHtml::select($items, $mainItem->status, "status");
+        
+        $items = array();
+        $items[] = array("value"=>0, "text"=>"Disable");
+        $items[] = array("value"=>1, "text"=>"Enable");        
+        $list['feature'] = buildHtml::select($items, $mainItem->feature, "feature");        
+        return $list;
+    }
+    
 
     public function addPost($data) {
         $transaction = $this->connection->beginTransaction();

@@ -2,7 +2,7 @@
 
 define("TBL_MENU", "{{menus}}");
 define("TBL_MENU_ITEM", "{{menu_item}}");
-define("TBL_NEWS", "{{news_content}}");
+define("TBL_ARTICLES", "{{articles}}");
 define("TBL_CATEGORIES", "{{categories}}");
 define("TBL_EXTENSIONS", "{{extensions}}");
 define("TBL_MODULES", "{{modules}}");

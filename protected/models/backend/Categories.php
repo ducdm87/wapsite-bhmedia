@@ -35,50 +35,7 @@ class Categories extends CFormModel {
         $obj_module = YiiCategory::getInstance();
         $items = $obj_module->loadItems();
         return $items;
-    }
-
-    public function addExtention($data) {
-        $transaction = $this->connection->beginTransaction();
-        try {
-            $this->command->insert($this->table, $data);
-            $transaction->commit();
-            return TRUE;
-        } catch (Exception $e) {
-            Yii::log('Eror!: ' + $e->getMessage());
-            $transaction->rollback();
-            return false;
-        }
-    }
-
-    public function saveExtention() {
-        $transaction = $this->connection->beginTransaction();
-        try {
-            $this->command->update($this->table, $data, 'id=:id', array('id' => $data['id']));
-            $transaction->commit();
-            return TRUE;
-        } catch (Exception $e) {
-            Yii::log('Eror!: ' + $e->getMessage());
-            $transaction->rollback();
-            return false;
-        }
-    }
-
-    public function deleteExtention($id) {
-        $transaction = $this->connection->beginTransaction();
-        try {
-            $this->command->delete($this->table, 'id=:id', array('id' => $id));
-            $transaction->commit();
-            return TRUE;
-        } catch (Exception $e) {
-            Yii::log('Eror!: ' + $e->getMessage());
-            $transaction->rollback();
-            return false;
-        }
-    }
-
-    public function getExtensionById($cid) {
-         
-    }  
+    } 
     
      function getListEdit($mainitem){
          

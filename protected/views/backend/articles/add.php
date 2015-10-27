@@ -1,6 +1,3 @@
-<div class="page-header">
-    <h1><span class="text-left-sm">Post / </smail>create new</h1>
-</div>
 <div class="clearfix"></div>
 <div class="module row">
     <form action="<?php echo $this->createUrl('articles/add') ?>" method="post">
