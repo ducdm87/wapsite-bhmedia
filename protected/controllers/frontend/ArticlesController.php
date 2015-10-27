@@ -14,8 +14,8 @@ class ArticlesController extends FrontEndController {
     
     public function actionDisplay() {
         $model = Article::getInstance();
-        $params["items"] = $model->getLastNews();
-
+        $params["items"] = $model->getTinTuc();
+         
         $this->render('default', $params);
     }
 

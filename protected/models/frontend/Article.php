@@ -35,7 +35,7 @@ class Article {
         
         if(count($items))
             foreach($items as &$item){
-                $item['link'] = fnCreateUrlNewsDetail($item['id'],$item['alias'],$item['catid'], $item['cat_alias'] );
+                $item['link'] = fnCreateUrlNewsDetail($item['id'],$item['alias'],$item['catID'], $item['cat_alias'] );
                 addObjectID($item['id'], "news");
             }
         return $items;
@@ -44,7 +44,7 @@ class Article {
     /*
      * $listid: danh sach id chuyen muc
 	*/
-    function getTinTuc($scope = "article", $listid = "", $limit = 6){
+    function getTinTuc($scope = "articles", $listid = "", $limit = 6){
         global $mainframe, $db;
         $where = " ";
         if($scope != "*"){
@@ -58,6 +58,7 @@ class Article {
                    ." ORDER BY ordering ASC";
         $query_command = $db->createCommand($query);
         $items = $query_command->queryAll();
+         
         
         $arr_new = array();
          for($i=0;$i<count($items);$i++){
@@ -98,7 +99,7 @@ class Article {
         $where = implode(" AND ",$where);
         $query = "SELECT A.*, B.alias cat_alias, B.title cat_title "
                     ."FROM " . $this->tablename 
-                             . " A LEFT JOIN ". $this->tbl_category . " B ON A.catid = B.id "
+                             . " A LEFT JOIN ". $this->tbl_category . " B ON A.catID = B.id "
                     ." WHERE  $where "
                    ." ORDER BY A.created DESC, A.ordering DESC LIMIT $start, $limit";
         $query_command = $db->createCommand($query);
@@ -106,7 +107,7 @@ class Article {
         
         if(count($items))
             foreach($items as &$item){
-                $item['link'] = fnCreateUrlNewsDetail($item['id'],$item['alias'],$item['catid'], $item['cat_alias'] );
+                $item['link'] = fnCreateUrlNewsDetail($item['id'],$item['alias'],$item['catID'], $item['cat_alias'] );
                 addObjectID($item['id'], "news");
             }
         

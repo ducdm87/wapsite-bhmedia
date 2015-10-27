@@ -8,6 +8,7 @@
                 <th class="title"> <a>Name</a></th>
                 <th class="title" width="3%"> <a>Status</a></th>
                 <th class="title" width="3%"> <a>Feature</a></th>
+                <th class="title" width="20%"> <a>Category</a></th>
                 <th class="title" width="15%"> <a>Created</a></th>
                 <th class="title"  width="3%"> <a>ID</a></th>
             </tr>
@@ -17,6 +18,7 @@
             $k = 0;
             foreach ($items as $i => $item) {
                 $link_edit = $this->createUrl('videos/edit?cid=' . $item['id']);   
+                $link_edit_cat = $this->createUrl('categories/edit?cid=' . $item['catID']);   
                 $item['slug'] = $item['id']."-".$item['alias'];
                 $params = urlencode(json_encode( array("id"=>$item['slug']) ));
                  
@@ -32,6 +34,9 @@
                     </td>
                     <td><?php echo buildHtml::status($i, $item['status']); ?></td>
                     <td><?php echo buildHtml::changState($i, $item['feature'],"feature."); ?></td>
+                    <td>
+                        <a href="<?php echo $link_edit_cat; ?>"><?php echo $item['cat_title']; ?></a>                           
+                    </td>
                     <td><?php echo $item['cdate'] ?></td>
                     <td><?php echo $item['id'] ?></td>
                 </tr>

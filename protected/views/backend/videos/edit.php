@@ -11,35 +11,12 @@
                     </div>
                 </div>
                 <div class="panel-body">
-                      
-                    <div class="form-group row">
-                        <div class="col-md-3">Tên</div>
-                        <div class="col-md-9">
-                            <input type="text" name="title" class="form-control title-generate" value="<?php echo $item->title; ?>">
-                        </div>
-                    </div>
+                    <?php echo buildHtml::renderField("label", "id", $item->id, "ID"); ?>
+                    <?php echo buildHtml::renderField("text", "title", $item->title, "Title", "form-control title-generate"); ?>
+                    <?php echo buildHtml::renderField("text", "alias", $item->alias, "Alias", "form-control alias-generate", "Auto-generate from title"); ?>
+                    <?php echo buildHtml::renderField("text", "duration", $item->duration, "Duration"); ?>
+                    <?php echo buildHtml::renderField('textarea',"info", $item->info, "Description"); ?> 
                     
-                    <div class="form-group row">
-                        <div class="col-md-3">Alias</div>
-                        <div class="col-md-9">
-                            <input type="text" name="alias" class="form-control alias-generate" placeholder="Auto-generate from title" value="<?php echo $item->alias; ?>">
-                        </div>
-                    </div> 
-                    
-                    <div class="form-group row">
-                        <div class="col-md-3">Duration</div>
-                        <div class="col-md-9">
-                            <input type="text" class="input-sm form-control" name="duration" value="<?php echo $item->duration; ?>"/>
-                        </div>
-                    </div>
-                     
-                    <div class="form-group row">
-                        <div class="col-md-3">Desciprion</div>
-                        <div class="col-md-9">
-                            <textarea name="info" rows="3" class="form-control"><?php echo $item->info; ?></textarea>
-                        </div>
-                    </div>
-
                 </div>
             </div>
             
@@ -74,39 +51,11 @@
                     <span><b>More info</b></span>
                 </div>
                 <div class="panel-body">
-                    <div class="clearfix"></div>
-                    <div class="form-group row">
-                        <div class="col-md-3">Category</div>
-                        <div class="col-md-9">
-                            <select class="form-control" name="category">
-                                <?php if (isset($categories) && $categories): ?>
-                                    <?php foreach ($categories as $category): ?>
-                                        <option value="<?php echo $category['id'] ?>" <?php echo isset($item['catID']) && ($item['catID'] == $category['id']) ? 'selected' : '' ?>><?php echo $category['title'] ?></option>
-                                    <?php endforeach; ?>
-                                <?php endif; ?>
-                            </select>
-                        </div>
-                    </div>
-                     
-                    <div class="form-group row">
-                        <div class="col-md-3">Status</div>
-                        <div class="col-md-9">
-                            <select name="status" class="form-control">
-                                <option value="1">Enable</option>
-                                <option value="0">Disable</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group row">
-                        <div class="col-md-3">Feature</div>
-                        <div class="col-md-9">
-                            <select name="feature" class="form-control">
-                                <option value="1">Enable</option>
-                                <option value="0">Disable</option>
-                            </select>
-                        </div>
-                    </div>
+                    <?php echo buildHtml::renderField("calander", "cdate", $item->cdate, "Created",null, "",3,9); ?>
+                    <?php echo buildHtml::renderField("label", "mdate", $item->mdate, "Modified",null, "",3,9); ?>
+                    <?php echo buildHtml::renderField("label", "category", $list['category'], "Category",null, "",3,9); ?>
+                    <?php echo buildHtml::renderField("label", "status", $list['status'], "Status",null, "",3,9); ?>
+                    <?php echo buildHtml::renderField("label", "Feature", $list['feature'], "Feature",null, "",3,9); ?>                     
                 </div>
             </div>
             

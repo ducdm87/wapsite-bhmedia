@@ -206,6 +206,12 @@ and open the template in the editor.
     padding: 0 5px 0 10px;
 }
 
+.entry-container .entry-header .entry-title .box-bg-center a{     
+    color: #fff;
+    font-size: 18px;    
+    line-height: 32px;        
+}
+
 .entry-container .entry-body{  
     margin: 0 10px;
 }

@@ -30,6 +30,78 @@ class Video extends CFormModel {
         }
         return $instance;
     } 
+    
+    /*
+     * $listid: danh sach id chuyen muc
+	*/
+    function getVideos($listid = "", $limit = 6){
+        global $mainframe, $db;
+        $where = " "; 
+        if($listid != ""){ $where .= " AND id in($listid) "; }
+        
+        $query = "SELECT * FROM " . $this->tbl_category 
+                    ." WHERE status = 1 $where "
+                   ." ORDER BY ordering ASC";
+        $query_command = $db->createCommand($query);
+        $items = $query_command->queryAll();
+         
+        
+        $arr_new = array();
+         for($i=0;$i<count($items);$i++){
+             $item = $items[$i];
+             $item['link'] = Yii::app()->createUrl("articles/category",array("alias"=>$item['alias']));
+             $item['contents'] = $this->getNewCategoy($item['id'],0, $limit);
+             $arr_new[$item['id']] = $item;
+         }
+         $items = $arr_new;
+         
+         if($listid != ""){
+             $listid = explode(",", $listid);
+             $arr_new = array();
+             foreach ($listid as $k=>$id){
+                 if(isset($items[$id]))
+                    $arr_new[$id] = $items[$id];
+             }
+             $items = $arr_new;
+         }
+         
+        return $items;
+        
+        return $str_out;
+    }
+    
+    function getNewCategoy($catID, $start = 0, $limit = 10)
+    {
+        global $mainframe, $db;
+        $list_idnews = getListObjectID("news");
+
+        $where = array();
+        $where[] = "A.status = 1";
+        $where[] = "B.status = 1";
+        $where[] = "A.catid = $catID ";
+        if($list_idnews != false and $list_idnews != ""){
+        	$where[] = "A.id not in($list_idnews)";
+        }
+        $where = implode(" AND ",$where);
+        $query = "SELECT A.*, B.alias cat_alias, B.title cat_title "
+                    ."FROM " . $this->table 
+                             . " A LEFT JOIN ". $this->tbl_category . " B ON A.catID = B.id "
+                    ." WHERE  $where "
+                   ." ORDER BY A.created DESC, A.ordering DESC LIMIT $start, $limit";
+        $query_command = $db->createCommand($query);
+        $items = $query_command->queryAll();
+        
+        if(count($items))
+            foreach($items as &$item){
+                $item['link'] = fnCreateUrlNewsDetail($item['id'],$item['alias'],$item['catID'], $item['cat_alias'] );
+                addObjectID($item['id'], "news");
+            }
+        
+        return $items;
+    } 
+    
+    
+    
      
     function getItems($catID = null, $feature = 0, $limit = 10, $start = 0)
     {

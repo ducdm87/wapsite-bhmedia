@@ -66,9 +66,9 @@ class VideosController extends BackEndController {
         
         $model = Video::getInstance();
         $item = $model->getItem($cid);
-        $lists = $model->getListEdit($item);
+        $list = $model->getListEdit($item);
         
-        $this->render('edit', array("item" => $item, "lists"=>$lists));
+        $this->render('edit', array("item" => $item, "list"=>$list));
     }
 
     function actionApply() {

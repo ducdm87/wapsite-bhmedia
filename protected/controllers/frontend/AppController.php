@@ -21,6 +21,8 @@ class AppController extends FrontEndController {
     }
 
     public function actionDisplay() {
+        $model_videos = Video::getInstance();
+        
         $model_category = Category::getInstance();
         $list_category = $model_category->getItems();
         if(count($list_category)){
@@ -30,9 +32,11 @@ class AppController extends FrontEndController {
             }
         }
         
-        //$model_news = News::getInstance();
-        
         $data = array();
+        $model = Article::getInstance();
+        $data["items_news"] = $model->getLastNews(5);
+        
+        
         $data['list_category'] = $list_category;              
        // $data['news'] = $list_category;              
         $this->render('default', $data);
