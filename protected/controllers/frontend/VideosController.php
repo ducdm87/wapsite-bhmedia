@@ -31,29 +31,40 @@ class VideosController extends FrontEndController {
         $model = Video::getInstance();
         
         $catAlias = Request::getVar('alias',null);
-        $page = Request::getVar('page',1);
+        $currentPage = Request::getVar('page',1);
         $limit = 12;
         
         $data['alias'] = $catAlias;
-        $data['category'] = $model->getCategory(null, $catAlias);
+        $obj_category = $model->getCategory(null, $catAlias);
           
-        if($data['category'] == false){
+        if($obj_category == false){
             $this->redirect($this->createUrl("app/"));
         }
-        if($page == 1)
-            $data['items'] = $model->getItems($data['category']['id'], true,5);
-        $start = ($page - 1)*$limit;
-        $data['items2'] = $model->getItems($data['category']['id'], false,$limit, $start);
+        if($currentPage == 1)
+            $data['items'] = $model->getItems($obj_category['id'], true,5);
+        $start = ($currentPage - 1)*$limit;
+        $data['items2'] = $model->getItems($obj_category['id'], false,$limit, $start);
        
-        if($data['category']['total'] > $start  + $limit ){            
-            $page++;
-        }else $page--;
-        $catAlias = $data['category']['alias'];
+        if($obj_category['total'] > $start  + $limit ){            
+            $page = $currentPage + 1;
+        }else $page = $currentPage - 1;
+        $catAlias = $obj_category['alias'];
+        
         if($page>1){            
-            $data['category']['pagemore'] = Yii::app()->createUrl("videos/category", array("alias"=>$catAlias, "page"=>$page));
+            $obj_category['pagemore'] = Yii::app()->createUrl("videos/category", array("alias"=>$catAlias, "page"=>$page));
         }else if($page == 1)
-            $data['category']['pagemore'] = Yii::app()->createUrl("videos/category", array("alias"=>$catAlias));
+            $obj_category['pagemore'] = Yii::app()->createUrl("videos/category", array("alias"=>$catAlias));
  
+        $page_title = $obj_category['title'];
+        if($currentPage > 1) $page_title = $page_title . " trang $currentPage";
+        $page_keyword = $obj_category['metakey'] != ""?$obj_category['metakey']:$page_title;
+        $page_description = $obj_category['metadesc'] != ""?$obj_category['metadesc']:$page_title;
+        
+        setSysConfig("seopage.title",$page_title); 
+        setSysConfig("seopage.keyword",$page_keyword); 
+        setSysConfig("seopage.description",$page_description);
+        
+        $data['category'] = $obj_category;
         $this->render('category', $data);
     }
     
@@ -65,22 +76,33 @@ class VideosController extends FrontEndController {
         $model =  Video::getInstance();
         if($id == null OR $id == ""){
             if($alias != null and $alias != ""){
-                $item = $model->getItemByAlias($alias);
+                $obj_item = $model->getItemByAlias($alias);
             }else{
                 header("Location: /");
             }
         }else{
-            $item = $model->getItem($id);
+            $obj_item = $model->getItem($id);
         }
         
-        $items = $model->getItems($item['catID'], true,4);
-        $items2 = $model->getItems($item['catID'], false,15);
-        $data['category'] = $model->getCategory($item['catID']);
-         
+        $items = $model->getItems($obj_item['catID'], true,4);
+        $items2 = $model->getItems($obj_item['catID'], false,15);
+        $obj_category = $model->getCategory($obj_item['catID']);
         
-        $data['item'] = $item;
+        $data['item'] = $obj_item;
         $data['items'] = $items;
         $data['items2'] = $items2;
+        $data['category'] = $obj_category;
+        
+        $page_title = $obj_item['title'];        
+        $page_keyword = $obj_item['metakey'] != ""?$obj_item['metakey']:$page_title;
+        $page_description = $obj_item['metadesc'] != ""?$obj_item['metadesc']:$page_title;
+        
+        setSysConfig("seopage.title",$page_title); 
+        setSysConfig("seopage.keyword",$page_keyword); 
+        setSysConfig("seopage.description",$page_description);
+        Request::setVar('alias',$obj_category['alias']);
+        
+        
         $this->render('detail', $data);
     }     
  

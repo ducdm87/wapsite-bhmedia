@@ -17,6 +17,12 @@ class ArticlesController extends FrontEndController {
         $model = Article::getInstance();
         $params["items"] = $model->getTinTuc();
          
+        $page_title = "wapsite - trang tin tức tổng hợp nhanh nhất";
+        
+        setSysConfig("seopage.title",$page_title); 
+        setSysConfig("seopage.keyword",$page_title); 
+        setSysConfig("seopage.description",$page_title);
+        
         $this->render('default', $params);
     } 
     
@@ -25,26 +31,40 @@ class ArticlesController extends FrontEndController {
         $model = Article::getInstance();
         
         $catAlias = Request::getVar('alias',null);
-        $page = Request::getVar('page',1);
+        $currentPage = Request::getVar('page',1);
          
         $limit = 12;
         
         $data['alias'] = $catAlias;
-        $data['category'] = $model->getCategory(null, $catAlias);
-        if($data['category'] == false){
+        $obj_category = $model->getCategory(null, $catAlias);
+        if($obj_category == false){
             $this->redirect($this->createUrl("articles/"));
         }
         
-        $start = ($page - 1)*$limit;
-        $data['category']['items'] = $model->getArticlesCategoy($data['category']['id'],$start, $limit);
-        if($data['category']['total'] > $start  + $limit ){            
-            $page++;
-        }else $page--;
+        $start = ($currentPage - 1)*$limit;
+        $obj_category['items'] = $model->getArticlesCategoy($obj_category['id'],$start, $limit);
+        if($obj_category['total'] > $start  + $limit ){            
+            $page = $currentPage + 1;
+        }else $page = $currentPage - 1;
+        $catAlias = $obj_category['alias'];
+
         if($page>1){
-            $catAlias = $data['category']['alias'];
-            $data['category']['pagemore'] = Yii::app()->createUrl("articles/category", array("alias"=>$catAlias, "page"=>$page));
+            
+            $obj_category['pagemore'] = Yii::app()->createUrl("articles/category", array("alias"=>$catAlias, "page"=>$page));
         }elseif($page == 1)
-            $data['category']['pagemore'] = Yii::app()->createUrl("articles/category", array("alias"=>$catAlias));
+            $obj_category['pagemore'] = Yii::app()->createUrl("articles/category", array("alias"=>$catAlias));
+        
+        $page_title = $obj_category['title'];
+        if($currentPage > 1) $page_title = $page_title . " trang $currentPage";
+        $page_keyword = $obj_category['metakey'] != ""?$obj_category['metakey']:$page_title;
+        $page_description = $obj_category['metadesc'] != ""?$obj_category['metadesc']:$page_title;
+        
+        setSysConfig("seopage.title",$page_title); 
+        setSysConfig("seopage.keyword",$page_keyword); 
+        setSysConfig("seopage.description",$page_description);
+        
+        $data['category'] = $obj_category;
+        
         $this->render('category', $data);
     }
 
@@ -54,9 +74,21 @@ class ArticlesController extends FrontEndController {
         $cid = Request::getVar('id',null);
         $alias = Request::getVar('alias',null);
         $model = Article::getInstance();
-        $data['item'] = $model->getItem($cid, $alias);
-        $data['category'] = $model->getCategory($data['item']['catID']);
+        $obj_item = $model->getItem($cid, $alias);
+        $obj_category = $model->getCategory($obj_item['catID']);
        
+        $data['item'] = $obj_item;
+        $data['category'] = $obj_category; 
+        
+        $page_title = $obj_item['title'];        
+        $page_keyword = $obj_item['metakey'] != ""?$obj_item['metakey']:$page_title;
+        $page_description = $obj_item['metadesc'] != ""?$obj_item['metadesc']:$page_title;
+        
+        setSysConfig("seopage.title",$page_title); 
+        setSysConfig("seopage.keyword",$page_keyword); 
+        setSysConfig("seopage.description",$page_description);
+        
+        
         $this->render('detail', $data);
     }
 

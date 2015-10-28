@@ -6,9 +6,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title><?php echo CHtml::encode($this->pageTitle); ?></title>
-        <meta name="description" content="<?php echo $this->metaDesc; ?>" />
-        <meta name="keywords" content="<?php echo $this->metaKey; ?>" />
+        <title><?php echo getSysConfig("seopage.title"); ?></title>
+        <meta name="description" content="<?php echo getSysConfig("seopage.description"); ?>" />
+        <meta name="keywords" content="<?php echo getSysConfig("seopage.keyword"); ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/templates/dist/css/bootstrap.min.css" /> 
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/templates/dist/font-awesome/css/font-awesome.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/templates/dist/css/color.css" />
@@ -79,13 +79,18 @@
                     </div>
                 </div>
             </div>
+            
+             <?php $controll = Yii::app()->controller->id; ?>
+             <?php $action = Yii::app()->controller->action->id; ?>
+             <?php $param_alias =  Request::getVar('alias',null); ?>
+            
             <div class="hidden-lg hidden-md">
                  <div class="collapse navbar-collapse " id="navbar-collapse-mobile">
                     <ul class="nav navbar-nav">
-                        <li><a href="<?php echo $this->createUrl('articles/') ?>" class="hidden-xs hidden-sm">Tin Tức</a></li>
-                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "the-thao") ); ?>" class="hidden-xs hidden-sm">Thể Thao</a></li>
-                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "hai-huoc") ); ?>" class="hidden-xs hidden-sm">Hài hước</a></li>
-                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "vui-nhon") ); ?>" class="hidden-xs hidden-sm">Vui nhộn</a></li>
+                            <li><a href="<?php echo $this->createUrl('articles/') ?>" class="<?php if($controll == "articles") echo 'active'; ?>">Tin Tức</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "the-thao") ); ?>" class="<?php if($controll == "videos" AND $param_alias == "the-thao") echo 'active'; ?>">Thể Thao</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "hai-huoc") ); ?>" class="<?php if($controll == "videos" AND $param_alias == "hai-huoc") echo 'active'; ?>">Hài hước</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "vui-nhon") ); ?>"  class="<?php if($controll == "videos" AND $param_alias == "vui-nhon") echo 'active'; ?>">Vui nhộn</a></li>
                     </ul>
                 </div>
             </div>
@@ -94,11 +99,11 @@
                 <div class="container-nav">
                     <nav class="navbar navbar-static-top">
                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="<?php echo $this->createUrl('app/') ?>" class="active">Home</a></li>
-                            <li><a href="<?php echo $this->createUrl('articles/') ?>" class="hidden-xs hidden-sm">Tin Tức</a></li>
-                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "the-thao") ); ?>" class="hidden-xs hidden-sm">Thể Thao</a></li>
-                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "hai-huoc") ); ?>" class="hidden-xs hidden-sm">Hài hước</a></li>
-                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "vui-nhon") ); ?>" class="hidden-xs hidden-sm">Vui nhộn</a></li>
+                            <li><a href="<?php echo $this->createUrl('app/') ?>" class="<?php if($controll == "app") echo 'active'; ?>">Home</a></li>
+                            <li><a href="<?php echo $this->createUrl('articles/') ?>" class="<?php if($controll == "articles") echo 'active'; ?>">Tin Tức</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "the-thao") ); ?>" class="<?php if($controll == "videos" AND $param_alias == "the-thao") echo 'active'; ?>">Thể Thao</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "hai-huoc") ); ?>" class="<?php if($controll == "videos" AND $param_alias == "hai-huoc") echo 'active'; ?>">Hài hước</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "vui-nhon") ); ?>"  class="<?php if($controll == "videos" AND $param_alias == "vui-nhon") echo 'active'; ?>">Vui nhộn</a></li>
                         </ul>
                     </nav>
                 </div>

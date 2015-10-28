@@ -24,6 +24,11 @@ class AppController extends FrontEndController {
         $data["items_videos"] = $model_videos->getVideos(5);        
         $data["items_news"] = $model_article->getLastNews(5); 
        // $data['news'] = $list_category;              
-        $this->render('default', $data);
+        
+        setSysConfig("seopage.title","wapsite - trang tổng hợp video, tin tức mới nhất"); 
+        setSysConfig("seopage.keyword","wapsite, tổng hợp video, tin tức mới nhất"); 
+        setSysConfig("seopage.description","wapsite - trang tổng hợp video, tin tức mới nhất"); 
+        
+        $this->render('default', $data);        
     }
 }
