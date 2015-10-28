@@ -32,25 +32,26 @@ class Video extends CFormModel {
     } 
     
     /*
+     * trang chu
      * $listid: danh sach id chuyen muc
 	*/
-    function getVideos($listid = "", $limit = 6){
+    function getVideos($limit = 5, $listid = ""){
         global $mainframe, $db;
         $where = " "; 
         if($listid != ""){ $where .= " AND id in($listid) "; }
         
-        $query = "SELECT * FROM " . $this->tbl_category 
-                    ." WHERE status = 1 $where "
+        $query = "SELECT * FROM " . TBL_CATEGORIES 
+                    ." WHERE status = 1 AND `scope` ='videos' "
                    ." ORDER BY ordering ASC";
         $query_command = $db->createCommand($query);
         $items = $query_command->queryAll();
-         
+          
         
         $arr_new = array();
          for($i=0;$i<count($items);$i++){
              $item = $items[$i];
-             $item['link'] = Yii::app()->createUrl("articles/category",array("alias"=>$item['alias']));
-             $item['contents'] = $this->getNewCategoy($item['id'],0, $limit);
+             $item['link'] = Yii::app()->createUrl("videos/category",array("alias"=>$item['alias']));
+             $item['videos'] = $this->getNewCategoy($item['id'],0, $limit);
              $arr_new[$item['id']] = $item;
          }
          $items = $arr_new;
@@ -63,87 +64,89 @@ class Video extends CFormModel {
                     $arr_new[$id] = $items[$id];
              }
              $items = $arr_new;
-         }
-         
+         }         
         return $items;
-        
-        return $str_out;
     }
     
     function getNewCategoy($catID, $start = 0, $limit = 10)
     {
         global $mainframe, $db;
-        $list_idnews = getListObjectID("news");
+        $list_ids = getListObjectID("videos");
 
         $where = array();
         $where[] = "A.status = 1";
         $where[] = "B.status = 1";
-        $where[] = "A.catid = $catID ";
-        if($list_idnews != false and $list_idnews != ""){
-        	$where[] = "A.id not in($list_idnews)";
+        $where[] = "A.catID = $catID ";
+        if($list_ids != false and $list_ids != ""){
+        	$where[] = "A.id not in($list_ids)";
         }
         $where = implode(" AND ",$where);
         $query = "SELECT A.*, B.alias cat_alias, B.title cat_title "
-                    ."FROM " . $this->table 
-                             . " A LEFT JOIN ". $this->tbl_category . " B ON A.catID = B.id "
+                    ."FROM " . TBL_VIDEOS 
+                             . " A LEFT JOIN ". TBL_CATEGORIES . " B ON A.catID = B.id "
                     ." WHERE  $where "
-                   ." ORDER BY A.created DESC, A.ordering DESC LIMIT $start, $limit";
+                   ." ORDER BY A.cdate DESC LIMIT $start, $limit";
         $query_command = $db->createCommand($query);
         $items = $query_command->queryAll();
         
         if(count($items))
             foreach($items as &$item){
-                $item['link'] = fnCreateUrlNewsDetail($item['id'],$item['alias'],$item['catID'], $item['cat_alias'] );
-                addObjectID($item['id'], "news");
+                $item['link'] = Yii::app()->createUrl("videos/detail", array("id" => $item['id'], "alias" => $item['alias']));
+                addObjectID($item['id'], "videos");
             }
         
         return $items;
     } 
     
-    
-    
      
+     // trang chuyen muc
     function getItems($catID = null, $feature = 0, $limit = 10, $start = 0)
     {
 //        filter_order, filter_order_Dir, limit, limitstart
         $filter_order = Request::getVar('filter_order','viewed');
         $filter_order_Dir = Request::getVar('filter_order_Dir','DESC');
         $command = Yii::app()->db->createCommand();
-        
-        $command->limit($limit, $start);
+ 
+        $command->limit($limit,$start);
         $command->order("$filter_order $filter_order_Dir");
         $where = array();
-        $where[] = "c.id = $catID";
-        $where[] = "a.feature = 1";
+        $where[] = "B.id = $catID";
+        if($feature == 1)
+            $where[] = "A.feature = 1";
         $command->where(implode(" AND ", $where));
         
-        $items = $command->select('a.*,c.title as name,c.alias as calias, c.id as cid,ep.*,lk.*')
-                ->from("$this->table  a")
-                ->join("$this->table_categories  c", 'a.catID=c.id')
-                ->join("$this->table_episode  ep", 'a.id=ep.film_id')
-                ->leftjoin("$this->table_like lk", "a.id=lk.fid")
-                ->queryAll();
-   
-        
+        $items = $command->select('A.*,B.title as name,B.alias as calias, B.id as cid')
+                ->from("$this->table  A")
+                ->join("$this->table_categories B", 'A.catID=B.id')
+                ->queryAll(); 
+         
         if(count($items))
             foreach($items as & $item){
                 $item['slug'] = $item['id']."-".$item['alias'];
-                $item['link'] = Yii::app()->createUrl("videos/detail", array("id"=> $item['id'], "alias"=>$item['alias']));
+                $item['link'] = Yii::app()->createUrl("videos/detail", array("id"=> $item['id'], "alias"=>$item['alias']));                
+                addObjectID($item['id'], "videos");
             }
         return $items;
     }
     
-    function getCategoryByAlias($catAlias){
-         $command = $this->command->select('*')
-                ->from("$this->table_categories")
-                ->where("alias=:alias");
-         $command->bindValue(":alias", $catAlias);
-         $item = $command->queryRow();
-                 
+    function getCategory($catID, $alias = null){
+        $obj_table = YiiTables::getInstance(TBL_CATEGORIES);
+        $obj_video = YiiTables::getInstance(TBL_VIDEOS);
+        
+        if(intval($catID) >0 )
+            $item = $obj_table->loadRow("*", " status = 1 AND `id` = $catID");
+        else
+            $item = $obj_table->loadRow("*", " status = 1 AND `alias` = '$alias'");
+         
+         if($item){
+            $item['link'] = Yii::app()->createUrl("videos/category",array("alias"=>$item['alias']));
+            $item['total'] = $obj_video->getTotal(" status = 1 AND `catID` = ".$item['id']);
+         }
          
         return $item;
     }
     
+    // chi tiet 1 video
     function getItem($id){
         $command = Yii::app()->db->createCommand();
         $where = array();
@@ -171,6 +174,7 @@ class Video extends CFormModel {
         return $item;
     }
     
+    // chi tiet
     function getItemByAlias($alias){
         $command = Yii::app()->db->createCommand();
         $where = array();

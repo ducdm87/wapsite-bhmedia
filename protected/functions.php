@@ -45,7 +45,7 @@ function addListObjectID($data, $type = "news") {
     return count($sys_config[$key]);
 }
 
-function addObjectID($id, $type = "news") {
+function addObjectID($id, $type = "article") {
     global $sys_config;
     $key = "$type-listcontent";
     if (!isset($sys_config[$key]))
@@ -54,7 +54,7 @@ function addObjectID($id, $type = "news") {
     return count($sys_config[$key]);
 }
 
-function getListObjectID($type = "news", $format = "string", $sperator = ",") {
+function getListObjectID($type = "article", $format = "string", $sperator = ",") {
     global $sys_config;
     $key = "$type-listcontent";
     if (!isset($sys_config[$key]))

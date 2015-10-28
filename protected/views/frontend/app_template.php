@@ -82,10 +82,10 @@
             <div class="hidden-lg hidden-md">
                  <div class="collapse navbar-collapse " id="navbar-collapse-mobile">
                     <ul class="nav navbar-nav">
-                        <li><a href="<?php echo $this->createUrl('/news') ?>" class="">Tin Tức</a></li>
-                            <li><a href="/videos?t=the-thao" class="">Thể Thao</a></li>
-                            <li><a href="/videos?t=hai" class="">Hài</a></li>
-                            <li><a href="/videos?t=dien-anh" class="">Điện Ảnh</a></li>
+                        <li><a href="<?php echo $this->createUrl('articles/') ?>" class="hidden-xs hidden-sm">Tin Tức</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "the-thao") ); ?>" class="hidden-xs hidden-sm">Thể Thao</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "hai-huoc") ); ?>" class="hidden-xs hidden-sm">Hài hước</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "vui-nhon") ); ?>" class="hidden-xs hidden-sm">Vui nhộn</a></li>
                     </ul>
                 </div>
             </div>
@@ -97,8 +97,8 @@
                             <li class="active"><a href="<?php echo $this->createUrl('app/') ?>" class="active">Home</a></li>
                             <li><a href="<?php echo $this->createUrl('articles/') ?>" class="hidden-xs hidden-sm">Tin Tức</a></li>
                             <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "the-thao") ); ?>" class="hidden-xs hidden-sm">Thể Thao</a></li>
-                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "hai") ); ?>" class="hidden-xs hidden-sm">Hài</a></li>
-                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "dien-anh") ); ?>" class="hidden-xs hidden-sm">Điện Ảnh</a></li>                            
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "hai-huoc") ); ?>" class="hidden-xs hidden-sm">Hài hước</a></li>
+                            <li><a href="<?php echo $this->createUrl('videos/category',array('alias'=> "vui-nhon") ); ?>" class="hidden-xs hidden-sm">Vui nhộn</a></li>
                         </ul>
                     </nav>
                 </div>

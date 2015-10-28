@@ -20,12 +20,13 @@ $settings = array(
                 '/' => array('app/display'),
                 '' => array('app/'),                             
 
-                'tin-tuc' => array('articles/'),                 
-                'tin-tuc/<alias:[\d\w-]+>' => array('articles/category'),
-                'tin-tuc/<alias:[\d\w-]+>/trang-<page:[0-9]+>' => array('articles/category'),
+                'tin-tuc' => array('articles/', 'urlSuffix'=>'/'),                 
+                'tin-tuc/<alias:[\d\w-]+>/trang-<page:[0-9]+>' => array('articles/category', 'urlSuffix'=>'/'),
+                'tin-tuc/<alias:[\d\w-]+>' => array('articles/category', 'urlSuffix'=>'/'),
                 'tin-tuc/<id:[0-9]+>-<alias:.*>' => array('articles/detail','urlSuffix'=>'.html'),
-                          
-                '<alias:[\d\w-]+>' => array('videos/category','urlSuffix'=>'/'), 
+                
+                '<alias:[\d\w-]+>/trang-<page:[\d\w-]+>' => array('videos/category','urlSuffix'=>'/'),
+                '<alias:[\d\w-]+>' => array('videos/category','urlSuffix'=>'/'),
                 'video/<id:[0-9]+>-<alias:[\d\w-]+>' => array('videos/detail','urlSuffix'=>'.html'), 
                 'video/<alias:[\d\w-]+>' => array('videos/detail'),                
                 'video/viewed/<id:.+>.js' => array('videos/setview'),

@@ -1,5 +1,5 @@
 <?php 
-function showBlockHome($items, $title = "Video Hot", $url = ""){
+function showBlockHome($items, $title = "Video Hot", $url = "", $type="video"){
     if(count($items)<1) return false;
     $item = $items[0];
     unset($items[0]);
@@ -13,7 +13,7 @@ function showBlockHome($items, $title = "Video Hot", $url = ""){
                             <div class="box-bg-left">
                                 <div class="box-bg-right">
                                     <div class="box-bg-center">                                
-                                        <?php echo $title; ?>
+                                        <a href="<?php echo $url; ?>"><?php echo $title; ?></a>
                                     </div>
                                 </div>
                             </div>
@@ -28,7 +28,9 @@ function showBlockHome($items, $title = "Video Hot", $url = ""){
                             <div class="col-md-4 no-padding-md">                                 
                                     <div href="<?php echo $item['link']; ?>" class="thumbnail">
                                         <img src="<?php echo $item['thumbnail'] ?>" alt="<?php echo $item['title'] ?>">
-                                        <a href="<?php echo $item['link']; ?>" class="icon-play"></a>
+                                        <?php if($type == "video"){?>
+                                            <a href="<?php echo $item['link']; ?>" class="icon-play"></a>
+                                        <?php } ?>
                                         <div class="caption">
                                             <a href="<?php echo $item['link']; ?>"><?php echo isset($item['title']) ? $item['title'] : '' ?></a>
                                         </div>
@@ -76,14 +78,17 @@ function showBlockHome($items, $title = "Video Hot", $url = ""){
     <?php
 }
  
+ 
 ?>
  
 
 <div class="page-home">
-    <?php foreach($list_category as $category){     
+    <?php foreach($items_videos as $category){     
         ?>
-        <?php showBlockHome($category['items'], $category['title'], $category['link'] ); ?>
+        <?php showBlockHome($category['videos'], $category['title'], $category['link'] ); ?>
     <?php } ?>
+    
+    <?php showBlockHome($items_news, "Tin tức", Yii::app()->createUrl("articles/"),"article" ); ?>
 </div>
        
      

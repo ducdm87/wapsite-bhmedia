@@ -138,6 +138,7 @@ class YiiTables{
                 ->from($this->_tablename);
         if($conditions != null) $command->where($conditions);
         $result = $command->queryScalar();
+        
         return $result;
     }
     

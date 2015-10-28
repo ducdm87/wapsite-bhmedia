@@ -14,37 +14,16 @@ class AppController extends FrontEndController {
     private $media;
 
     function init() {
-        parent::init();        
-        $this->category = Category::getInstance();
-        $this->post = Post::getInstance();
-        $this->media = Media::getInstance();
+        parent::init();
     }
 
     public function actionDisplay() {
         $model_videos = Video::getInstance();
+        $model_article = Article::getInstance();
         
-        $model_category = Category::getInstance();
-        $list_category = $model_category->getItems();
-        if(count($list_category)){
-            $media = Media::getInstance();
-            foreach ($list_category as & $category){
-                $category['items'] = $media->getItems($category['id'], $feature = 1, 5);                
-            }
-        }
-        
-        $data = array();
-        $model = Article::getInstance();
-        $data["items_news"] = $model->getLastNews(5);
-        
-        
-        $data['list_category'] = $list_category;              
+        $data["items_videos"] = $model_videos->getVideos(5);        
+        $data["items_news"] = $model_article->getLastNews(5); 
        // $data['news'] = $list_category;              
         $this->render('default', $data);
     }
-
-    private function getMedia() {
-        $media = new Media();
-        return $media->getMedias(4, 0, array('m.type' => 1));
-    }
-
 }

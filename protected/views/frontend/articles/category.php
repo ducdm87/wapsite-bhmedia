@@ -1,7 +1,6 @@
  
 
-<div class="page-news">   
-    <?php foreach ($items as $category): ?>
+<div class="page-news">  
         <div class="entry-container">
             <div class="entry-header">                
                 <div class="container-fluid">                
@@ -28,10 +27,10 @@
                                     </a>
                                 </div>
                                 <div class="media-body entry-caption">
-                                    <h4 class="media-heading"><a href="<?php echo $obj_article['link'] ?>"><?php echo $obj_article['title'] ?></a></h4>
+                                    <h4 class="media-heading"><a href="<?php echo $obj_article['link']; ?>"><?php echo $obj_article['title'] ?></a></h4>
                                     <?php echo $obj_article['introtext'] ?>
                                     <div class="readmore">
-                                        <a href="<?php echo $obj_article['link'] ?>">Xem thêm >></a>
+                                        <a href="<?php echo $obj_article['link']; ?>">Xem thêm >></a>
                                     </div>
                                 </div>
                             </div>
@@ -42,5 +41,12 @@
             </div>
         </div>
         <div class="clearfix"></div>
-    <?php endforeach; ?>        
+         <div class="fill-data-morepage"></div>
+        <?php if(isset($category['pagemore'])){?>
+        <div class="entry-container">
+            <div class="entry-header">
+                <div class="text-center more-page"><a href="<?php echo $category['pagemore'];?>">Xem thêm</a></div>
+            </div>
+        </div>
+        <?php } ?>
 </div>

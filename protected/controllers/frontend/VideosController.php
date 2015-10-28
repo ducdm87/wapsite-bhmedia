@@ -21,17 +21,43 @@ class VideosController extends FrontEndController {
         $this->media = Media::getInstance();
     }
 
+    // trang chu video
     public function actionDisplay() {
-        $data = array();
-        $type = 1;
-        $model = Video::getInstance();
          
-        $data['videos'] = $model->getMedias(5, 0, array('m.type' => $type), false, $order = 'm.viewed', $by = "DESC");
-        $data ['allvideos'] = $model->getMedias(0, 0, array('m.type' => $type), false, $order = 'm.viewed', $by = "ASC");
-
-        $this->render('default', $data);
     }
 
+    // danh muc video
+    function actionCategory(){
+        $model = Video::getInstance();
+        
+        $catAlias = Request::getVar('alias',null);
+        $page = Request::getVar('page',1);
+        $limit = 12;
+        
+        $data['alias'] = $catAlias;
+        $data['category'] = $model->getCategory(null, $catAlias);
+          
+        if($data['category'] == false){
+            $this->redirect($this->createUrl("app/"));
+        }
+        if($page == 1)
+            $data['items'] = $model->getItems($data['category']['id'], true,5);
+        $start = ($page - 1)*$limit;
+        $data['items2'] = $model->getItems($data['category']['id'], false,$limit, $start);
+       
+        if($data['category']['total'] > $start  + $limit ){            
+            $page++;
+        }else $page--;
+        $catAlias = $data['category']['alias'];
+        if($page>1){            
+            $data['category']['pagemore'] = Yii::app()->createUrl("videos/category", array("alias"=>$catAlias, "page"=>$page));
+        }else if($page == 1)
+            $data['category']['pagemore'] = Yii::app()->createUrl("videos/category", array("alias"=>$catAlias));
+ 
+        $this->render('category', $data);
+    }
+    
+    // chi tiet video
     public function actionDetail() {
         $id = Request::getVar('id',null);
         $alias = Request::getVar('alias',null);
@@ -49,26 +75,16 @@ class VideosController extends FrontEndController {
         
         $items = $model->getItems($item['catID'], true,4);
         $items2 = $model->getItems($item['catID'], false,15);
+        $data['category'] = $model->getCategory($item['catID']);
+         
+        
         $data['item'] = $item;
         $data['items'] = $items;
         $data['items2'] = $items2;
         $this->render('detail', $data);
-    }
-    
-    function actionCategory(){
-        $model = Video::getInstance();
-        
-        $catAlias = Request::getVar('alias',null);
-        $data['alias'] = $catAlias;
-        $data['category'] = $model->getCategoryByAlias($catAlias);
-        if($data['category'] == false){
-            $this->redirect($this->createUrl("app/"));
-        }
-        $data['items'] = $model->getItems($data['category']['id'], true,5);
-        $data['items2'] = $model->getItems($data['category']['id'], false,9);
-        $this->render('category', $data);
-    }
+    }     
  
+    // tang view khi play
     public function actionSetView() {
         $id = Request::getVar('id',null);
         $model = Video::getInstance();
@@ -80,6 +96,7 @@ class VideosController extends FrontEndController {
         }
     }
     
+    // like video
     function actionLikevideo(){
         $id = Request::getVar('id',null);
         $model = Video::getInstance();

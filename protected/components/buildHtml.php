@@ -260,4 +260,12 @@ class buildHtml {
          
         return $out;        
     }
+    
+    public static function TruncateText($text, $max_len=30) {
+            $len = mb_strlen($text, 'UTF-8');
+            if ($len <= $max_len)
+                return $text;
+            else
+                return mb_substr($text, 0, $max_len - 1, 'UTF-8') . '...';
+        }
 }

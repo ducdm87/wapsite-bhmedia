@@ -12,7 +12,7 @@
                         <div class="box-bg-left">
                             <div class="box-bg-right">
                                 <div class="box-bg-center">                                
-                                   <?php echo $item['title']; ?>
+                                    <a href="<?php echo $category['link']; ?>"><?php echo $category['title']; ?></a>
                                 </div>
                             </div>
                         </div>
@@ -21,6 +21,7 @@
             </div>
             <div class="entry-body">
                 <?php if (isset($item) && $item): ?>
+                <h1><a href="<?php echo $item['link']; ?>"><?php echo $item['title']; ?></a></h1>
                     <div class="container-fluid">
                         <div class="col-md-5">
                             <div class="row">
@@ -148,13 +149,4 @@
         </div>
     </div>
     </div>
-
-    <div class="fill-data-morepage"></div>
-    
-    <div class="entry-container">
-        <div class="entry-header">
-            <div class="text-center more-page"><a href="../">Xem thêm</a></div>
-        </div>
-    </div>
-    
 </div>

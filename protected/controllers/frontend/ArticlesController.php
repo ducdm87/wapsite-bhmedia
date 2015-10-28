@@ -12,33 +12,50 @@ class ArticlesController extends FrontEndController {
         $this->post = Article::getInstance();
     }
     
+    // trang chu tin tuc
     public function actionDisplay() {
         $model = Article::getInstance();
         $params["items"] = $model->getTinTuc();
          
         $this->render('default', $params);
-    }
-
-    public function actionLastNews() {
+    } 
+    
+    // trang chuyen muc
+    public function actionCategory() { 
         $model = Article::getInstance();
-        $params["items"] = $model->getLastNews();
-
-        $this->render('default', $params);
+        
+        $catAlias = Request::getVar('alias',null);
+        $page = Request::getVar('page',1);
+         
+        $limit = 12;
+        
+        $data['alias'] = $catAlias;
+        $data['category'] = $model->getCategory(null, $catAlias);
+        if($data['category'] == false){
+            $this->redirect($this->createUrl("articles/"));
+        }
+        
+        $start = ($page - 1)*$limit;
+        $data['category']['items'] = $model->getArticlesCategoy($data['category']['id'],$start, $limit);
+        if($data['category']['total'] > $start  + $limit ){            
+            $page++;
+        }else $page--;
+        if($page>1){
+            $catAlias = $data['category']['alias'];
+            $data['category']['pagemore'] = Yii::app()->createUrl("articles/category", array("alias"=>$catAlias, "page"=>$page));
+        }elseif($page == 1)
+            $data['category']['pagemore'] = Yii::app()->createUrl("articles/category", array("alias"=>$catAlias));
+        $this->render('category', $data);
     }
 
+    // trang chi tiet
     public function actionDetail() {
 
-        $id = $_GET['id'];
-
-        $alias = $_GET['alias'];
-
-        $data['post'] = $this->post->getPostById($id);
-        if ($data['post']['alias'] != $alias) {
-            if ($error = Yii::app()->errorHandler->error) {
-                $this->render('error', $error);
-            } 
-        }
-        $data['category'] = $this->category->getCategoryById($data['post']['catid']);
+        $cid = Request::getVar('id',null);
+        $alias = Request::getVar('alias',null);
+        $model = Article::getInstance();
+        $data['item'] = $model->getItem($cid, $alias);
+        $data['category'] = $model->getCategory($data['item']['catID']);
        
         $this->render('detail', $data);
     }

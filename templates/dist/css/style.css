@@ -309,7 +309,7 @@ and open the template in the editor.
     border: 2px solid #afcf4a;
     height: 276px;
     margin: 0;
-    padding: 0;
+    padding: 0 5px;
     position: relative;
 }
 .entry-body .thumbnail img{
@@ -324,6 +324,7 @@ and open the template in the editor.
      background: #0e1501 none repeat scroll 0 0;
     opacity: 0.8;
     bottom: 0;
+    left: 0;
 }
 .entry-body .thumbnail .caption a{
     color: #fff;
@@ -412,7 +413,7 @@ and open the template in the editor.
 .page-videos .well{
     background: none;
     border: none;
-        box-shadow: none;
+    box-shadow: none;
 }
 
 .readmore a, .media-heading, .media-heading a{
@@ -740,3 +741,8 @@ body.users {
 }
 
 .video-player{ width: 100%; height: 315px; }
+
+.page-article-detail .container{  
+    line-height: 24px;
+    text-align: justify;
+}
