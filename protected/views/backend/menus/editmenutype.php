@@ -7,19 +7,19 @@
                     <div class="form-group">
                         <label class="control-label">Name</label>
                         <div>
-                            <input type="text" name="title" class="form-control" value="<?php echo $item['title']; ?>">
+                            <input type="text" name="title" class="form-control" value="<?php echo $obj_tblMenu->title; ?>">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Alias</label>
                         <div>
-                            <input type="text" name="alias" class="form-control" value="<?php echo $item['alias']; ?>">
+                            <input type="text" name="alias" class="form-control" value="<?php echo $obj_tblMenu->alias; ?>">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">Description</label>
                         <div>
-                            <textarea type="text" name="description" class="form-control"><?php echo $item['description']; ?></textarea>
+                            <textarea type="text" name="description" class="form-control"><?php echo $obj_tblMenu->description; ?></textarea>
                         </div>
                     </div>
                 </div>
@@ -29,6 +29,6 @@
         </div>
     </div>
     
-    <input type="hidden" name="id" value="<?php echo $item['id']; ?>">    
-    <input type="hidden" name="cid[]" value="<?php echo $item['id']; ?>">    
+    <input type="hidden" name="id" value="<?php echo $obj_tblMenu->id; ?>">    
+    <input type="hidden" name="cid[]" value="<?php echo $obj_tblMenu->id; ?>">    
 </form>

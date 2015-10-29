@@ -8,15 +8,10 @@
 
 class ArticlesController extends BackendController {
 
-    private $post_model;
-    private $category;
-
     function init() {
         parent::init();
         yii::import('application.models.backend.article.*');
-        $this->post_model = Article::getInstance();
         yii::import('application.models.backend.category.*');
-        $this->category = Category::getInstance();
     }
 
     public function actionDisplay() {

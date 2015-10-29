@@ -70,10 +70,10 @@ class BackEndController extends CController {
             if (!$mainframe->isAdmin()) {
                 YiiMessage::raseWarning("Your account not have permission to visit backend page");
                 Yii::app()->session['userbackend'] = null;
-                $this->redirect(array('user/logout'));
+                $this->redirect(array('users/logout'));
                 return;
             }
-            if ($app->controller->id == "user" and $app->controller->action->id == "login") {
+            if ($app->controller->id == "users" and $app->controller->action->id == "login") {
                 $this->redirect(array('/cpanel'));
                 return;
             }
@@ -85,7 +85,7 @@ class BackEndController extends CController {
                 )
             );
             return $return;
-        } else if ($app->controller->id == "user" and $app->controller->action->id == "login") {
+        } else if ($app->controller->id == "users" and $app->controller->action->id == "login") {
 
             return array(
                 array('allow', // allow all users to access 'formlogin' and 'login' actions.
@@ -100,7 +100,7 @@ class BackEndController extends CController {
                 ),
             );
         } else {
-            $this->redirect(array('user/login'));
+            $this->redirect(array('users/login'));
 //            return array();
         }
     }

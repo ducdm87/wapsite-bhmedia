@@ -40,6 +40,11 @@ define("ENABLE_SSO", 0);
 define("ROOT_PATH", dirname(dirname(__FILE__)) ."/");
 define('PATH_APIFILE', ROOT_PATH . "tmp/apifile/");
 
+define('PATH_APPS', dirname(__FILE__) . "/apps/");
+define('PATH_MODULES', dirname(__FILE__) . "/extensions/modules/");
+define('PATH_APPS_BACKEND', dirname(__FILE__) . "/apps/backend");
+define('PATH_APPS_FRONT', dirname(__FILE__) . "/apps/frontend");
+
 global $sys_config, $sys_menu;
 $sys_menu = $sys_config = array();
 

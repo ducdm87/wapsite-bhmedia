@@ -21,6 +21,7 @@
                                     <input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo $items?count($items):0; ?>);"> 
                                 </th>
                                 <th width="25%">Name</th>    
+                                <th width="2%">level</th>    
                                 <th width="5%" align="center">Status</th>
                                 <th width="16%">Modified</th>
                                 <th width="5%">ID</th>
@@ -30,6 +31,7 @@
                              <?php if (isset($items) && $items): ?>                                
                                 <?php foreach ($items as $i=> $item): 
                                     $link_edit = $this->createUrl('menus/editmenuitem?menu='.$item['menuID'].'&cid=' . $item['id']);  
+                                    $item['title'] = str_repeat("&nbsp;&nbsp;", $item['level']) ." - " . $item['title'];
                                     ?>
                                     <tr>
                                         <td><?php echo $i + 1; ?></td>                                        
@@ -37,6 +39,7 @@
                                             <input id="cb<?php echo $i; ?>" type="checkbox" name="cid[]" value="<?php echo $item["id"]; ?>" onclick="isChecked(this.checked);">                                            
                                         </td>
                                         <td><a href="<?php echo $link_edit; ?>"><?php echo $item['title']; ?></a></td>                                        
+                                        <td align="center"><?php echo $item['level']; ?></td>                                        
                                                                             
                                         <td align="center"><?php echo buildHtml::status($i, $item['status']); ?></td>
                                         <td><?php echo $item['mdate'];  ?></td>
