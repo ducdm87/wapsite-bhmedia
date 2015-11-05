@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2015 at 10:46 AM
+-- Generation Time: Nov 05, 2015 at 09:03 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -260,6 +260,40 @@ CREATE TABLE IF NOT EXISTS `tbl_module_menuitem_ref` (
 
 INSERT INTO `tbl_module_menuitem_ref` (`moduleID`, `menuID`) VALUES
 (1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_module_position`
+--
+
+CREATE TABLE IF NOT EXISTS `tbl_module_position` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `temp` varchar(128) NOT NULL,
+  `position` varchar(128) NOT NULL,
+  `description` text NOT NULL,
+  `params` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=14 ;
+
+--
+-- Dumping data for table `tbl_module_position`
+--
+
+INSERT INTO `tbl_module_position` (`id`, `temp`, `position`, `description`, `params`) VALUES
+(1, 'mytheme-yii', 'menu-nav', '', ''),
+(2, 'mytheme-yii', 'debug', '', ''),
+(3, 'mytheme-yii', 'col-left', '', ''),
+(4, 'mytheme-yii', 'col-right', '', ''),
+(5, 'mytheme-yii', 'header', '', ''),
+(6, 'mytheme-yii', 'footer', '', ''),
+(7, 'mytheme-yii', 'breadcrump', '', ''),
+(8, 'mytheme-yii', 'slide', '', ''),
+(9, 'mytheme-yii', 'main-center', '', ''),
+(10, 'mytheme-yii', 'main-bottom', '', ''),
+(11, 'mytheme-yii', 'main-top', '', ''),
+(12, 'trangbenhvien', 'main-menu', '', ''),
+(13, 'trangbenhvien', 'top-banner', '', '');
 
 -- --------------------------------------------------------
 

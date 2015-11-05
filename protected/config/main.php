@@ -11,6 +11,7 @@ define("TBL_SESSION", "{{session}}");
 define("TBL_USERS", "{{users}}");
 define("TBL_USERS_GROUP", "{{users_group}}");
 define("TBL_VIDEOS", "{{videos}}");
+define("TBL_MODULE_POSITION", "{{module_position}}");
 
 
 return array(
